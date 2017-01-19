@@ -49,6 +49,10 @@ gem 'thor', '0.19.1'
 # Beautify IRB console
 gem 'hirb'
 
+# Authentication
+gem 'devise'
+gem 'jwt'
+
 # For heroku
 ruby '2.2.6'
 

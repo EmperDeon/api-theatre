@@ -1,5 +1,11 @@
 class UtilsController < ApplicationController
+    before_action :check_api_token
+
     def lists
-        render json: THall.all
+        res logged_in: 'true'
+    end
+
+    def updates
+
     end
 end

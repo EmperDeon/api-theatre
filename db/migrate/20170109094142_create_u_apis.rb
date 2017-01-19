@@ -4,7 +4,7 @@ class CreateUApis < ActiveRecord::Migration[5.0]
             t.integer :theatre_id
 
             t.string :login
-            t.string :password
+            t.string :password_digest
 
             t.string :fio
             t.string :tel_num

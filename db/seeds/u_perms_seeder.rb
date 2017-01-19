@@ -10,9 +10,10 @@ end
 #   name:: Permission name
 #   add:: Additional permissions
 def create_u_perms (name, add = [])
-    perms = %w(s _create _edit _delete)
+    perms = %w(_create _edit _delete)
     perms += add
 
+    create_u_perm(name)
     perms.each { |v|
         create_u_perm(name + v)
     }
@@ -29,13 +30,13 @@ def add_perms_to_user (user, perms)
 end
 
 
-create_u_perms 'theatre'
-create_u_perms 'user'
-create_u_perms 'actor'
-create_u_perms 'perf'
-create_u_perms 'poster'
-create_u_perms 'article'
-create_u_perms 't_perf'
+create_u_perms 'theatres'
+create_u_perms 'users'
+create_u_perms 'actors'
+create_u_perms 'perfs'
+create_u_perms 'posters'
+create_u_perms 'articles'
+create_u_perms 't_perfs'
 
 create_u_perm('theatre_choose')
 

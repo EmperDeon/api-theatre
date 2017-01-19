@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
     create_table "u_apis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
         t.integer "theatre_id"
         t.string "login"
-        t.string "password"
+        t.string "password_digest"
         t.string "fio"
         t.string "tel_num"
         t.string "position"
