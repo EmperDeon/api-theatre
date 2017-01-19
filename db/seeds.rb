@@ -5,12 +5,6 @@ def load_seed (name)
     require File.join(Rails.root, 'db', 'seeds', name + '_seeder')
 end
 
-# Get id for heroku (cleardb)
-#
-#  i:: id
-def id (i)
-    (i-1)*10 + 4
-end
 
 # Execute custom SQL code
 #
