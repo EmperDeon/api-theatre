@@ -1,0 +1,2 @@
+class UWeb < ApplicationRecord
+end

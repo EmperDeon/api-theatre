@@ -1,0 +1,2 @@
+class UApi < ApplicationRecord
+end
