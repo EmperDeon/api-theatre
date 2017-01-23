@@ -53,6 +53,9 @@ gem 'hirb'
 gem 'devise'
 gem 'jwt'
 
+# Markdown render
+gem 'redcarpet'
+
 # For heroku
 ruby '2.2.6'
 

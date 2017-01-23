@@ -7,10 +7,10 @@ Rails.application.routes.draw do
     def res (name)
         scope '/' + name + '/' do
             get '/', to: name + '#index'
-            get '/create', to: name + '#create'
-            get '/update', to: name + '#update'
-            get '/delete', to: name + '#delete'
             get '/:id', to: name + '#show'
+            post '/create', to: name + '#create'
+            post '/update', to: name + '#update'
+            post '/delete', to: name + '#delete'
         end
     end
 

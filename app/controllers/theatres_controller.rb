@@ -11,11 +11,17 @@ class TheatresController < ApplicationController
 
 
     def create
-
+        t = Theatre.create(params.permit(:name, :desc, :img))
+        res 'OK'
     end
 
     def update
-
+        t = Theatre.find(params[:id])
+        if t.update(params.permit(:name, :desc, :img))
+            res 'OK'
+        else
+            err 'validation_error', t.errors, 500
+        end
     end
 
     def delete
