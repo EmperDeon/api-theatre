@@ -7,6 +7,7 @@ class CreatePerformances < ActiveRecord::Migration[5.0]
             t.string :author
 
             t.timestamps
+            t.datetime :deleted_at
         end
         add_foreign_key :performances, :p_types, column: :type_id
     end

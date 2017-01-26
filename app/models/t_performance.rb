@@ -1,4 +1,4 @@
-class TPerformance < ApplicationRecord
+class TPerformance < ResourceRecord
     #
     # Relations
     #

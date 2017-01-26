@@ -10,7 +10,8 @@ Rails.application.routes.draw do
             get '/:id', to: name + '#show'
             post '/create', to: name + '#create'
             post '/update', to: name + '#update'
-            post '/delete', to: name + '#delete'
+            post '/destroy', to: name + '#destroy'
+            post '/restore', to: name + '#restore'
         end
     end
 
@@ -24,7 +25,6 @@ Rails.application.routes.draw do
     scope '/auth_web' do
         get 'new', to: 'auth#web_auth'
         get 'check', to: 'auth#web_check'
-
     end
 
     scope '/utils' do
@@ -41,5 +41,5 @@ Rails.application.routes.draw do
 
     res 't_perfs'
     res 'posters'
-
+    res 'posts'
 end

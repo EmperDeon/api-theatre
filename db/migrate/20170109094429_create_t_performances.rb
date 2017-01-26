@@ -9,6 +9,7 @@ class CreateTPerformances < ActiveRecord::Migration[5.0]
             t.text :desc
 
             t.timestamps
+            t.datetime :deleted_at
         end
         add_foreign_key :t_performances, :theatres
         add_foreign_key :t_performances, :performances, column: :perf_id

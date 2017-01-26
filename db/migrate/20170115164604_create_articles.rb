@@ -9,6 +9,7 @@ class CreateArticles < ActiveRecord::Migration[5.0]
             t.text :desc_s
 
             t.timestamps
+            t.datetime :deleted_at
         end
 
         add_foreign_key :articles, :theatres

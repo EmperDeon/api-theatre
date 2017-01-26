@@ -7,6 +7,7 @@ class CreatePosters < ActiveRecord::Migration[5.0]
             t.datetime :date
 
             t.timestamps
+            t.datetime :deleted_at
         end
         add_foreign_key :posters, :t_performances, column: :t_perf_id
         add_foreign_key :posters, :t_halls

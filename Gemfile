@@ -56,9 +56,8 @@ gem 'jwt'
 # Markdown render
 gem 'redcarpet'
 
+# Safe deletion of models (deleted_at)
+gem 'paranoia', '~> 2.2'
+
 # For heroku
 ruby '2.2.6'
-
-group :production do
-    gem 'rails_12factor'
-end

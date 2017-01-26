@@ -1,4 +1,8 @@
-class Article < ApplicationRecord
+class Article < ResourceRecord
+    # Allowed for mass-assignment fields. For get_params in ResourceController
+    FILLABLE = [:name, :desc, :desc_s, :img, :theatre_id]
+
+
     #
     # Relations
     #
@@ -6,7 +10,9 @@ class Article < ApplicationRecord
 
 
     #
-    # Scopes
+    # Validations
     #
-    scope :closest, -> (count) { order(id: :desc).limit(count) if count } # For index
+    validates :name, presence: true, length: {in: 5..255}
+    validates :desc, :desc_s, {presence: true, length: {in: 5..65536}}
+    # validates :img
 end

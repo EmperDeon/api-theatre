@@ -10,7 +10,7 @@ end
 #   name:: Permission name
 #   add:: Additional permissions
 def create_u_perms (name, add = [])
-    perms = %w(_create _edit _delete)
+    perms = %w(_create _update _destroy)
     perms += add
 
     create_u_perm(name)

@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.string "img"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
+        t.datetime "deleted_at"
         t.index ["theatre_id"], name: "fk_rails_1111cf655a", using: :btree
     end
 
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.text "desc_s", limit: 65535
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
+        t.datetime "deleted_at"
         t.index ["theatre_id"], name: "fk_rails_57adbfb39c", using: :btree
     end
 
@@ -42,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.string "name"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
+        t.datetime "deleted_at"
     end
 
     create_table "performances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -50,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.string "author"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
+        t.datetime "deleted_at"
         t.index ["type_id"], name: "fk_rails_04496abe1c", using: :btree
     end
 
@@ -59,6 +63,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.datetime "date"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
+        t.datetime "deleted_at"
         t.index ["t_hall_id"], name: "fk_rails_bcdd488789", using: :btree
         t.index ["t_perf_id"], name: "fk_rails_b667d2586f", using: :btree
     end
@@ -69,6 +74,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.text "json", limit: 65535
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
+        t.datetime "deleted_at"
         t.index ["theatre_id"], name: "fk_rails_075382ab4b", using: :btree
     end
 
@@ -80,6 +86,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.text "desc", limit: 65535
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
+        t.datetime "deleted_at"
         t.index ["perf_id"], name: "fk_rails_15a6bde515", using: :btree
         t.index ["theatre_id"], name: "fk_rails_eb58e15077", using: :btree
     end
@@ -92,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.string "tel_num"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
+        t.datetime "deleted_at"
     end
 
     create_table "u_apis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -103,6 +111,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.string "position"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
+        t.datetime "deleted_at"
         t.index ["theatre_id"], name: "fk_rails_7fff8de84e", using: :btree
     end
 
@@ -122,6 +131,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.string "tel_num"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
+        t.datetime "deleted_at"
     end
 
     add_foreign_key "actors", "theatres"

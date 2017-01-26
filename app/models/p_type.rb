@@ -1,2 +1,2 @@
-class PType < ApplicationRecord
+class PType < ResourceRecord
 end

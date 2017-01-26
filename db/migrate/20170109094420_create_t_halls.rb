@@ -7,6 +7,7 @@ class CreateTHalls < ActiveRecord::Migration[5.0]
             t.text :json
 
             t.timestamps
+            t.datetime :deleted_at
         end
         add_foreign_key :t_halls, :theatres
     end

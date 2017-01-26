@@ -63,7 +63,7 @@ class AuthController < ApplicationController
         return nil unless user and user.id
         {
             auth_token: JsonWebToken.encode({user_id: user.id, login: user.login}),
-            user: {id: user.id, login: user.login}
+            user: {login: user.login, fio: user.fio}
         }
     end
 end

@@ -1,8 +1,5 @@
 class ApplicationController < ActionController::API
     attr_reader :current_user
-    #
-    # # Here because doesn't matter, is current user API or WEB
-    # before_action :check_perm
 
     #
     # For 'before_action' method
@@ -27,8 +24,8 @@ class ApplicationController < ActionController::API
 
     # Render json for normal response
     #  obj:: object
-    def res (obj)
-        render json: {response: obj}
+    def res (obj, s = 200)
+        render json: {response: obj}, status: s
     end
 
     # Render json for error
@@ -38,6 +35,13 @@ class ApplicationController < ActionController::API
     def err (e, m, s)
         render json: {error: e, message: m}, status: s
     end
+
+
+    #
+    # Exceptions rescue
+    #
+    rescue_from ActiveRecord::RecordNotFound, with: lambda { |e| err('no_id', e.message, :not_found) }
+    rescue_from ActiveRecord::RecordInvalid, with: lambda { |e| err('validation_error', e.message, :unprocessable_entity) }
 
 
     #
@@ -77,24 +81,5 @@ class ApplicationController < ActionController::API
     #
     def user_id_in_token?
         auth_token && auth_token[:user_id].present? && auth_token[:login].present?
-    end
-
-
-    #
-    # Permissions helper methods
-    #
-
-    # Check, are current user has permission to view/perform current action(path)
-    def check_perm
-        user = @current_user
-        path = request.env['PATH_INFO']
-
-
-        path[0] = '' # Delete first '/' character
-        perm = path.gsub(/\//, '_') # Replace backslash(/) with underscore(_)
-
-        unless user.has_perm? perm
-            err 'no_access', 'Not enough permissions to perform action', 405
-        end
     end
 end

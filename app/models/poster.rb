@@ -1,4 +1,4 @@
-class Poster < ApplicationRecord
+class Poster < ResourceRecord
     #
     # Relations
     #
@@ -9,8 +9,6 @@ class Poster < ApplicationRecord
     #
     # Scopes
     # TODO: Rewrite without 'then'
-    scope :closest, -> (count) { order(id: :desc).limit(count).includes(:t_hall, :t_perf) if count } # For index
-
     scope :by_month, -> (month) { where('MONTH(date) = ?', month) if month }
     scope :by_day, -> (day) { where('DAYOFWEEK(date) = ?', day) if day }
     scope :by_time, -> (time) { where('DATE_FORMAT(date, \'%H:%i\') = ?', get_time(time)) if time }

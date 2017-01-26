@@ -5,20 +5,23 @@ class UtilsController < ApplicationController
         res get_hash params[:name]
     end
 
+    # noinspection RailsChecklist01
     def updates
         stamp = Time.at(params[:stamp].to_i ||= 0)
-        r = {}
 
-        r['articles'] = get_updates(Article, stamp)
-        r['p_types'] = get_updates(PType, stamp)
-        r['performances'] = get_updates(Performance, stamp)
-        r['posters'] = get_updates(Poster, stamp)
-        r['t_halls'] = get_updates(THall, stamp)
-        r['t_performances'] = get_updates(TPerformance, stamp)
-        r['theatres'] = get_updates(Theatre, stamp)
+        r = {
+            articles: Article.updated_since(stamp),
+            p_types: PType.updated_since(stamp),
+            performances: Performance.updated_since(stamp),
+            posters: Poster.updated_since(stamp),
+            t_halls: THall.updated_since(stamp),
+            t_performances: TPerformance.updated_since(stamp),
+            theatres: Theatre.updated_since(stamp),
+        }
 
         res r
     end
+
 
     #
     # Utils helper functions
@@ -156,12 +159,4 @@ class UtilsController < ApplicationController
 
         sql == ' WHERE ' ? '' : sql
     end
-
-    #
-    # Get updated entries from model
-    #
-    def get_updates (cl, stamp)
-        cl.where(updated_at: (stamp..Time.now))
-    end
-
 end

@@ -8,6 +8,7 @@ class CreateTheatres < ActiveRecord::Migration[5.0]
             t.string :tel_num
 
             t.timestamps
+            t.datetime :deleted_at
         end
     end
 end

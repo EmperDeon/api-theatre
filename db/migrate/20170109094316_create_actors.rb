@@ -8,6 +8,7 @@ class CreateActors < ActiveRecord::Migration[5.0]
             t.string :img
 
             t.timestamps
+            t.datetime :deleted_at
         end
         add_foreign_key :actors, :theatres
     end

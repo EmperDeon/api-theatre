@@ -1,30 +1,35 @@
-class TheatresController < ApplicationController
-
+class TheatresController < ResourceController
+    MODEL_CLASS = ::Theatre
 
     def index
-        res Theatre.all
+        @models = Theatre.includes(:t_halls)
     end
 
     def show
-        res Theatre.find(params[:id])
     end
 
+    # noinspection RailsChecklist01
+    def create_action
+        t = Theatre.create!(post_params)
 
-    def create
-        t = Theatre.create(params.permit(:name, :desc, :img))
-        res 'OK'
+        halls = JSON.parse (params[:t_halls] ||= '[]')
+
+        halls.each { |name|
+            THall.create!(name: name, theatre_id: t.id, json: '{}')
+        }
     end
 
-    def update
-        t = Theatre.find(params[:id])
-        if t.update(params.permit(:name, :desc, :img))
-            res 'OK'
-        else
-            err 'validation_error', t.errors, 500
-        end
-    end
+    def update_action
+        @model.update!(post_params)
 
-    def delete
+        halls = JSON.parse (params[:t_halls_new] ||= '[]')
+        halls.each { |name|
+            THall.create!(name: name, theatre_id: t.id, json: '{}')
+        }
 
+        halls = JSON.parse (params[:t_halls_del] ||= '[]')
+        halls.each { |id|
+            THall.destroy(id)
+        }
     end
 end

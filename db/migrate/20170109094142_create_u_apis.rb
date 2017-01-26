@@ -11,6 +11,7 @@ class CreateUApis < ActiveRecord::Migration[5.0]
             t.string :position
 
             t.timestamps
+            t.datetime :deleted_at
 
         end
         add_foreign_key :u_apis, :theatres

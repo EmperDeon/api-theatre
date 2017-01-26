@@ -4,6 +4,7 @@ class CreatePTypes < ActiveRecord::Migration[5.0]
             t.string :name
 
             t.timestamps
+            t.datetime :deleted_at
         end
     end
 end
