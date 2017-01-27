@@ -13,6 +13,6 @@ class Article < ResourceRecord
     # Validations
     #
     validates :name, presence: true, length: {in: 5..255}
-    validates :desc, :desc_s, {presence: true, length: {in: 5..65536}}
+    validates :desc, :desc_s, {presence: true, length: {in: 5..65535}}
     # validates :img
 end

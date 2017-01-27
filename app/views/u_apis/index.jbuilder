@@ -1,0 +1,7 @@
+json.response @models do |model|
+    json.(model, :id, :fio, :login, :tel_num, :position, :theatre_id)
+
+    json.perms model.u_perm_ids
+
+    json.(model, :created_at, :updated_at, :deleted_at)
+end

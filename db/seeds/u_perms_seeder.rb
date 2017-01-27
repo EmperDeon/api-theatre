@@ -31,7 +31,7 @@ end
 
 
 create_u_perms 'theatres'
-create_u_perms 'users'
+create_u_perms 'u_apis'
 create_u_perms 'actors'
 create_u_perms 'perfs'
 create_u_perms 'posters'

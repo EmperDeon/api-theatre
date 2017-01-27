@@ -3,12 +3,12 @@ require_relative 'boot'
 require 'rails'
 # Pick the frameworks you want:
 require 'active_model/railtie'
-require 'active_job/railtie'
+# require 'active_job/railtie'
 require 'active_record/railtie'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
-require 'action_cable/engine'
+# require 'action_cable/engine'
 # require "sprockets/railtie"
 require 'rails/test_unit/railtie'
 
@@ -28,9 +28,5 @@ module TheatresAPI
         config.api_only = true
 
         config.autoload_paths << Rails.root.join('lib/jwt')
-
-        # Turn off default rails behavior with helpers
-        #  By default Each controller includes all files from app/helpers/*
-        config.action_controller.include_all_helpers = false
     end
 end

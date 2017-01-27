@@ -1,5 +1,4 @@
 class ArticlesController < ResourceController
-    # Model class for
     MODEL_CLASS = ::Article
 
     def create_action

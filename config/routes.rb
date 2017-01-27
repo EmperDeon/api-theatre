@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     #  name:: Prefix for route and controller name
     def res (name)
         scope '/' + name + '/' do
+            # TODO: replace get with match get&post [for testing only]
             get '/', to: name + '#index'
             get '/:id', to: name + '#show'
             post '/create', to: name + '#create'
@@ -37,7 +38,7 @@ Rails.application.routes.draw do
     res 'articles'
     res 'actors'
     res 'theatres'
-    res 'users'
+    res 'u_apis'
 
     res 't_perfs'
     res 'posters'

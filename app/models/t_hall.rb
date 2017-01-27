@@ -7,6 +7,6 @@ class THall < ResourceRecord
     has_many :t_perfs, class_name: 'TPerformance'
 
 
-    validates :name, presense: true, length: {in: 5..255}
+    validates :name, presence: true, length: {in: 5..255}
 
 end
