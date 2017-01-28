@@ -25,11 +25,10 @@ class ResourceController < ApplicationController
 
     # These called from routes
     def index
-        res model_class.order(id: :desc).by_user(@current_user)
+        @models = model_class.order(id: :desc).by_user(@current_user)
     end
 
     def show
-        res @model
     end
 
     def create

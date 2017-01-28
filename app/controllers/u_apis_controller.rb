@@ -5,9 +5,6 @@ class UApisController < ResourceController
         @models = UApi.by_user(@current_user).where('login <> "admin"')
     end
 
-    def show
-    end
-
     def create_action
         u = UApi.new(post_params)
         u.theatre_id = @current_user.theatre_id

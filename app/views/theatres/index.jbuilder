@@ -3,5 +3,5 @@ json.response @models do |m|
 
     json.t_halls m.t_halls, :id, :name
 
-    json.(m, :created_at, :updated_at, :deleted_at)
+    json.timestamps(m, :created_at, :updated_at, :deleted_at)
 end

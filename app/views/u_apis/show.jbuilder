@@ -3,5 +3,5 @@ json.response do
 
     json.perms @model.u_perm_ids
 
-    json.(@model, :created_at, :updated_at, :deleted_at)
+    json.timestamps(@model, :created_at, :updated_at, :deleted_at)
 end

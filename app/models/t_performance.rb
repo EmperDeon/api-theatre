@@ -1,4 +1,7 @@
 class TPerformance < ResourceRecord
+    # Allowed for mass-assignment fields. For get_params in ResourceController
+    FILLABLE = [:desc, :desc_s, :img, :perf_id, :theatre_id]
+
     #
     # Relations
     #
@@ -11,7 +14,7 @@ class TPerformance < ResourceRecord
     #
     # Scopes
     #
-    scope :by_theatre, -> (id) { where(:theatre_id => id) }
+    scope :by_theatre, -> (id) { where(:theatre_id => id) if id } # TODO Already exists
 
     scope :by_type, -> (id) { joins(:perf).where(performances: {type_id: id}) if id }
     scope :by_name, -> (id) { where(perf_id: id) if id }
@@ -35,4 +38,11 @@ class TPerformance < ResourceRecord
 
         r
     end
+
+    #
+    # Validations
+    #
+    validates :img, presence: true, length: {in: 5..255}
+    validates :desc, :desc_s, presence: true, length: {in: 5..65535}
+    validates :perf, presence: true
 end

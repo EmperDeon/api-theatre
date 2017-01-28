@@ -48,13 +48,13 @@ ActiveRecord::Schema.define(version: 20170115164604) do
     end
 
     create_table "performances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-        t.integer "type_id"
+        t.integer "p_type_id"
         t.string "name"
         t.string "author"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
-        t.index ["type_id"], name: "fk_rails_04496abe1c", using: :btree
+        t.index ["p_type_id"], name: "fk_rails_9c1fd40ba9", using: :btree
     end
 
     create_table "posters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
 
     add_foreign_key "actors", "theatres"
     add_foreign_key "articles", "theatres"
-    add_foreign_key "performances", "p_types", column: "type_id"
+    add_foreign_key "performances", "p_types"
     add_foreign_key "posters", "t_halls"
     add_foreign_key "posters", "t_performances", column: "t_perf_id"
     add_foreign_key "t_halls", "theatres"
