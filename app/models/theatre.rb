@@ -14,7 +14,5 @@ class Theatre < ResourceRecord
     #
     validates :name, :img, :address, :tel_num, presence: true, length: {in: 5..255}
     validates :desc, {presence: true, length: {in: 5..65535}}
-
     validates :name, uniqueness: true
-    # validates :img
 end

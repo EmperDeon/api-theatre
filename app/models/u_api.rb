@@ -14,6 +14,7 @@ class UApi < ResourceRecord
     # Validations
     #
     validates :login, :fio, :tel_num, :position, presence: true, length: {in: 5..255}
+    validates :login, uniqueness: true
 
 
     #

@@ -15,11 +15,6 @@ class UWeb < ResourceRecord
     # Validations
     #
     validates :login, :fio, :tel_num, presence: true, length: {in: 5..255}
-
-
-    #
-    # Helper methods
-    #
-
+    validates :login, uniqueness: true
 
 end

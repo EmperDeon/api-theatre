@@ -2,7 +2,6 @@ class Article < ResourceRecord
     # Allowed for mass-assignment fields. For get_params in ResourceController
     FILLABLE = [:name, :desc, :desc_s, :img, :theatre_id]
 
-
     #
     # Relations
     #

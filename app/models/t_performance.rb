@@ -8,7 +8,15 @@ class TPerformance < ResourceRecord
     belongs_to :theatre
     belongs_to :perf, class_name: 'Performance'
 
-    has_many :posters, foreign_key: 't_perf_id'
+    has_many :posters, foreign_key: 't_perf_id', inverse_of: :t_perf
+
+
+    #
+    # Validations
+    #
+    validates :img, presence: true, length: {in: 5..255}
+    validates :desc, :desc_s, presence: true, length: {in: 5..65535}
+    validates :perf, presence: true
 
 
     #
@@ -38,11 +46,4 @@ class TPerformance < ResourceRecord
 
         r
     end
-
-    #
-    # Validations
-    #
-    validates :img, presence: true, length: {in: 5..255}
-    validates :desc, :desc_s, presence: true, length: {in: 5..65535}
-    validates :perf, presence: true
 end
