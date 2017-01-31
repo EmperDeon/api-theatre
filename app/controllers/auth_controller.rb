@@ -15,11 +15,11 @@ class AuthController < ApplicationController
     end
 
     def api_check
-        render json: {response: 'OK'}
+        res 'OK'
     end
 
     def api_perms
-        render json: {response: current_user.u_perms}
+        res @current_user.u_perms.collect { |h| h.perm }
     end
 
 
@@ -50,7 +50,7 @@ class AuthController < ApplicationController
     def auth(cl)
         user = cl.find_by_login(params[:login])
         if user.try(:authenticate, params[:pass])
-            render json: payload(user)
+            res payload(user)
         else
             err 'invalid_credentials', 'Invalid Username/Password', :unauthorized
         end

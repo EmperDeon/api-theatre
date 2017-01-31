@@ -18,14 +18,14 @@ Rails.application.routes.draw do
 
 
     scope '/auth_api' do
-        get 'new', to: 'auth#api_auth'
-        get 'check', to: 'auth#api_check'
-        get 'perms', to: 'auth#api_perms'
+        post 'new', to: 'auth#api_auth'
+        post 'check', to: 'auth#api_check'
+        post 'perms', to: 'auth#api_perms'
     end
 
     scope '/auth_web' do
-        get 'new', to: 'auth#web_auth'
-        get 'check', to: 'auth#web_check'
+        post 'new', to: 'auth#web_auth'
+        post 'check', to: 'auth#web_check'
     end
 
     scope '/utils' do
@@ -43,4 +43,6 @@ Rails.application.routes.draw do
     res 't_perfs'
     res 'posters'
     res 'posts'
+
+    root 'utils#test'
 end
