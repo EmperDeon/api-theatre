@@ -1,11 +1,12 @@
 class TPerformance < ResourceRecord
     # Allowed for mass-assignment fields. For get_params in ResourceController
-    FILLABLE = [:desc, :desc_s, :img, :perf_id, :theatre_id]
+    FILLABLE = [:desc, :desc_s, :img, :perf_id, :theatre_id, :t_hall_id]
 
     #
     # Relations
     #
     belongs_to :theatre
+    belongs_to :t_hall
     belongs_to :perf, class_name: 'Performance'
 
     has_many :posters, foreign_key: 't_perf_id', inverse_of: :t_perf
@@ -16,7 +17,7 @@ class TPerformance < ResourceRecord
     #
     validates :img, presence: true, length: {in: 5..255}
     validates :desc, :desc_s, presence: true, length: {in: 5..65535}
-    validates :perf, presence: true
+    validates :perf, :t_hall, presence: true # Relations validation
 
 
     #

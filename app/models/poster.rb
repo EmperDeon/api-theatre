@@ -1,6 +1,6 @@
 class Poster < ResourceRecord
     # Allowed for mass-assignment fields. For get_params in ResourceController
-    FILLABLE = [:t_perf_id, :t_hall_id, :date]
+    FILLABLE = [:t_perf_id, :date]
 
     #
     # Relations
@@ -13,7 +13,7 @@ class Poster < ResourceRecord
     # Validations
     #
     validate :check_uniqueness
-    validates :t_perf, :t_hall, :date, presence: true
+    validates :t_perf, :date, presence: true
 
 
     #
@@ -37,7 +37,7 @@ class Poster < ResourceRecord
 
     private
     def check_uniqueness
-        p = Poster.where('t_perf_id = ? AND t_hall_id = ? AND date = ?', t_perf_id, t_hall_id, date)
+        p = Poster.where('t_perf_id = ? AND date = ?', t_perf_id, date)
         if p.count > 0
             errors.add(:t_perf_id, ' needs to be unique')
         end

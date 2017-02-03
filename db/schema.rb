@@ -59,12 +59,10 @@ ActiveRecord::Schema.define(version: 20170115164604) do
 
     create_table "posters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
         t.integer "t_perf_id"
-        t.integer "t_hall_id"
         t.datetime "date"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
-        t.index ["t_hall_id"], name: "fk_rails_bcdd488789", using: :btree
         t.index ["t_perf_id"], name: "fk_rails_b667d2586f", using: :btree
     end
 
@@ -80,6 +78,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
 
     create_table "t_performances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
         t.integer "theatre_id"
+        t.integer "t_hall_id"
         t.integer "perf_id"
         t.string "img"
         t.string "desc_s"
@@ -88,6 +87,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
         t.index ["perf_id"], name: "fk_rails_15a6bde515", using: :btree
+        t.index ["t_hall_id"], name: "fk_rails_2983b217d0", using: :btree
         t.index ["theatre_id"], name: "fk_rails_eb58e15077", using: :btree
     end
 
@@ -137,10 +137,10 @@ ActiveRecord::Schema.define(version: 20170115164604) do
     add_foreign_key "actors", "theatres"
     add_foreign_key "articles", "theatres"
     add_foreign_key "performances", "p_types"
-    add_foreign_key "posters", "t_halls"
     add_foreign_key "posters", "t_performances", column: "t_perf_id"
     add_foreign_key "t_halls", "theatres"
     add_foreign_key "t_performances", "performances", column: "perf_id"
+    add_foreign_key "t_performances", "t_halls"
     add_foreign_key "t_performances", "theatres"
     add_foreign_key "u_apis", "theatres"
 end
