@@ -1,2 +1,3 @@
-TODO: Maybe change MySQL to SQLite on dev env
 TODO: !Important! Write tests
+TODO: Add theatre_id condition to utils_controller
+TODO: Play with GD2 gem (image creation)

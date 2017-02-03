@@ -12,88 +12,80 @@
 
 ActiveRecord::Schema.define(version: 20170115164604) do
 
-    create_table "actors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "actors", force: :cascade do |t|
         t.integer "theatre_id"
         t.string "name"
-        t.text "desc", limit: 65535
+        t.text "desc"
         t.string "img"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
-        t.index ["theatre_id"], name: "fk_rails_1111cf655a", using: :btree
     end
 
-    create_table "actors_t_performances", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "actors_t_performances", id: false, force: :cascade do |t|
         t.integer "t_performance_id", null: false
         t.integer "actor_id", null: false
     end
 
-    create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "articles", force: :cascade do |t|
         t.integer "theatre_id"
         t.string "name"
         t.string "img"
-        t.text "desc", limit: 65535
-        t.text "desc_s", limit: 65535
+        t.text "desc"
+        t.text "desc_s"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
-        t.index ["theatre_id"], name: "fk_rails_57adbfb39c", using: :btree
     end
 
-    create_table "p_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "p_types", force: :cascade do |t|
         t.string "name"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
     end
 
-    create_table "performances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "performances", force: :cascade do |t|
         t.integer "p_type_id"
         t.string "name"
         t.string "author"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
-        t.index ["p_type_id"], name: "fk_rails_9c1fd40ba9", using: :btree
     end
 
-    create_table "posters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "posters", force: :cascade do |t|
         t.integer "t_perf_id"
         t.datetime "date"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
-        t.index ["t_perf_id"], name: "fk_rails_b667d2586f", using: :btree
     end
 
-    create_table "t_halls", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "t_halls", force: :cascade do |t|
         t.integer "theatre_id"
         t.string "name"
-        t.text "json", limit: 65535
+        t.text "json"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
-        t.index ["theatre_id"], name: "fk_rails_075382ab4b", using: :btree
     end
 
-    create_table "t_performances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "t_performances", force: :cascade do |t|
         t.integer "theatre_id"
         t.integer "t_hall_id"
         t.integer "perf_id"
         t.string "img"
         t.string "desc_s"
-        t.text "desc", limit: 65535
+        t.text "desc"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
-        t.index ["perf_id"], name: "fk_rails_15a6bde515", using: :btree
-        t.index ["t_hall_id"], name: "fk_rails_2983b217d0", using: :btree
-        t.index ["theatre_id"], name: "fk_rails_eb58e15077", using: :btree
     end
 
-    create_table "theatres", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "theatres", force: :cascade do |t|
         t.string "name"
-        t.text "desc", limit: 65535
+        t.text "desc"
         t.string "img"
         t.string "address"
         t.string "tel_num"
@@ -102,7 +94,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.datetime "deleted_at"
     end
 
-    create_table "u_apis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "u_apis", force: :cascade do |t|
         t.integer "theatre_id"
         t.string "login"
         t.string "password_digest"
@@ -112,19 +104,18 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
-        t.index ["theatre_id"], name: "fk_rails_7fff8de84e", using: :btree
     end
 
-    create_table "u_apis_perms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "u_apis_perms", id: false, force: :cascade do |t|
         t.integer "u_api_id", null: false
         t.integer "u_perm_id", null: false
     end
 
-    create_table "u_perms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "u_perms", force: :cascade do |t|
         t.string "perm"
     end
 
-    create_table "u_webs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    create_table "u_webs", force: :cascade do |t|
         t.string "login"
         t.string "password"
         t.string "fio"
@@ -134,13 +125,4 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.datetime "deleted_at"
     end
 
-    add_foreign_key "actors", "theatres"
-    add_foreign_key "articles", "theatres"
-    add_foreign_key "performances", "p_types"
-    add_foreign_key "posters", "t_performances", column: "t_perf_id"
-    add_foreign_key "t_halls", "theatres"
-    add_foreign_key "t_performances", "performances", column: "perf_id"
-    add_foreign_key "t_performances", "t_halls"
-    add_foreign_key "t_performances", "theatres"
-    add_foreign_key "u_apis", "theatres"
 end

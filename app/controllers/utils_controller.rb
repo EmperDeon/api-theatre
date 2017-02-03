@@ -4,8 +4,12 @@ class UtilsController < ApplicationController
     # Allowed lists
     A_LISTS = %w(articles posters performances theatres p_types t_performances t_halls u_apis u_perms)
     A_HASHES = %w(articles posters performances theatres p_types t_performances t_halls u_apis u_perms)
-    # Def easy to access tables
+
+    # Easy to access tables (table has id and name columns)
     E_LISTS_C = %w(articles performances theatres p_types t_halls)
+
+    # Tables, with column theatre_id
+    T_LISTS = %w(t_halls t_performances articles actors u_apis)
 
     def lists
         res get_hash params[:name]
@@ -104,9 +108,15 @@ class UtilsController < ApplicationController
     def get_special_list(type)
         a = []
 
+        q = if Rails.env.production?
+                "DATE_FORMAT(date, '%H:%i')"
+            else
+                "strftime('%H:%M', date)"
+            end
+
         if type == 'time'
             a = ActiveRecord::Base.connection.execute(
-                "SELECT DISTINCT DATE_FORMAT(date, '%H:%i') AS 'time' FROM posters"
+                "SELECT DISTINCT #{q} AS 'time' FROM posters"
             ).to_a
 
             a.map! { |v| v[0] }
@@ -138,7 +148,11 @@ class UtilsController < ApplicationController
             sql += 't.id, p.name';
 
         elsif type == 'posters' # Unique
-            sql += "r.id, CONCAT(p.name,' - ',DATE_FORMAT(date, '%d-%m-%Y %H:%i'),' - ',h.name) AS name"
+            if Rails.env.production?
+                sql += "r.id, CONCAT(p.name,' - ',DATE_FORMAT(date, '%d-%m-%Y %H:%i'),' - ',h.name) AS name"
+            else
+                sql += "r.id, (strftime('%d-%m-%Y %H:%M', date) || ' - ' || p.name || ' - ' || h.name) AS name"
+            end
         end
 
         sql
@@ -154,7 +168,7 @@ class UtilsController < ApplicationController
             sql += 'posters AS r
   JOIN t_performances AS t ON r.t_perf_id=t.id
   JOIN performances AS p ON t.perf_id=p.id
-  JOIN t_halls AS h ON r.t_hall_id=h.id'
+  JOIN t_halls AS h ON t.t_hall_id=h.id'
 
         elsif type == 't_performances'
             sql += 't_performances AS t JOIN performances AS p ON t.perf_id=p.id';
@@ -172,7 +186,9 @@ class UtilsController < ApplicationController
     def get_conditions(type)
         sql = ' WHERE '
 
-        if type == 'u_perms'
+        if T_LISTS.includes? type
+            # sql += 'theatre'
+        elsif type == 'u_perms'
             sql += "perm NOT LIKE 'theatres%'"
         end
 
