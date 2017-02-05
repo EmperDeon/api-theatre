@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
 
     scope '/auth_api' do
-        post 'new', to: 'auth#api_auth'
+        match 'new', to: 'auth#api_auth', via: [:get, :post]
         post 'check', to: 'auth#api_check'
         post 'perms', to: 'auth#api_perms'
     end
