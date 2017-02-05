@@ -186,8 +186,13 @@ class UtilsController < ApplicationController
     def get_conditions(type)
         sql = ' WHERE '
 
-        if T_LISTS.includes? type
-            # sql += 'theatre'
+        if T_LISTS.include? type
+            # check_api_token
+
+            if @current_user && @current_user.theatre_id != 0
+                sql += 'theatre_id = ' + @current_user.theatre_id.to_s
+            end
+
         elsif type == 'u_perms'
             sql += "perm NOT LIKE 'theatres%'"
         end

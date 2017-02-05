@@ -43,6 +43,4 @@ Rails.application.routes.draw do
     res 't_perfs'
     res 'posters'
     res 'posts'
-
-    root 'utils#test'
 end

@@ -25,7 +25,11 @@ class ResourceController < ApplicationController
 
     # These called from routes
     def index
-        @models = model_class.order(id: :desc).by_user(@current_user)
+        @models = model_class.order(id: :desc)
+        if params[:del] && params[:del] == 'true'
+            @models = @models.with_deleted
+        end
+        @models = @models.by_user(@current_user)
     end
 
     def show
