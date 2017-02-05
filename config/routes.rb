@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     res 'articles'
     res 'actors'
     res 'theatres'
+    res 't_halls'
     res 'u_apis'
 
     res 't_perfs'
