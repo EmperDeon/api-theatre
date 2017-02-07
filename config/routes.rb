@@ -6,9 +6,8 @@ Rails.application.routes.draw do
     #  name:: Prefix for route and controller name
     def res (name)
         scope '/' + name + '/' do
-            # TODO: replace get with match get&post [for testing only]
-            get '/', to: name + '#index'
-            get '/:id', to: name + '#show'
+            match '/', to: name + '#index', via: [:get, :post]
+            match '/:id', to: name + '#show', via: [:get, :post]
             post '/create', to: name + '#create'
             post '/update', to: name + '#update'
             post '/destroy', to: name + '#destroy'

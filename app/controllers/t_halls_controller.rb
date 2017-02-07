@@ -5,14 +5,15 @@ class THallsController < ResourceController
         super
 
         if params[:preview] == 'true'
-            @previews = @models.ids.collect { |id|
-                get_preview_for_hall(id)
+            @previews = {}
+            @models.ids.each { |id|
+                @previews[id] = get_preview_for_hall(id)
             }
         end
     end
 
     private
     def get_preview_for_hall (id)
-        ActiveSupport::Base64.encode File.binread(Rails.public_path + '/none.png')
+        Base64.encode64 File.binread(Rails.public_path + 'none.png')
     end
 end
