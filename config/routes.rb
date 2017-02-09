@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
-    # Generates 'REST' routes for specified controller
+    # Generates 'CRUD' routes for specified controller
     #  Why not 'resources :name' ?
-    #  Because i don't want to work with PATCH, PUT, etc. in Qt
+    #  Because i don't want to work with PATCH, PUT, etc. in Qt (Theatres Admin App)
     #
-    #  name:: Prefix for route and controller name
+    # name:: Prefix for route and controller name
     def res (name)
         scope '/' + name + '/' do
-            match '/', to: name + '#index', via: [:get, :post]
-            match '/:id', to: name + '#show', via: [:get, :post]
-            post '/create', to: name + '#create'
-            post '/update', to: name + '#update'
-            post '/destroy', to: name + '#destroy'
-            post '/restore', to: name + '#restore'
+            match '/', as: '', to: name + '#index', via: [:get, :post]
+            match '/:id', as: '', to: name + '#show', via: [:get, :post]
+            post '/create', as: '', to: name + '#create'
+            post '/update', as: '', to: name + '#update'
+            post '/destroy', as: '', to: name + '#destroy'
+            post '/restore', as: '', to: name + '#restore'
         end
     end
 
