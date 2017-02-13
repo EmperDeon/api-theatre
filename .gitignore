@@ -46,4 +46,4 @@ bower.json
 .byebug_history
 
 .idea/
-public/img/*
+public/img/*.png
