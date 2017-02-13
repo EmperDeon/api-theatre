@@ -6,12 +6,12 @@ Rails.application.routes.draw do
     # name:: Prefix for route and controller name
     def res (name)
         scope '/' + name + '/' do
-            match '/', as: '', to: name + '#index', via: [:get, :post]
-            match '/:id', as: '', to: name + '#show', via: [:get, :post]
             post '/create', as: '', to: name + '#create'
             post '/update', as: '', to: name + '#update'
             post '/destroy', as: '', to: name + '#destroy'
             post '/restore', as: '', to: name + '#restore'
+            match '/', as: '', to: name + '#index', via: [:get, :post]
+            match '/:id', as: '', to: name + '#show', via: [:get, :post]
         end
     end
 
@@ -31,6 +31,9 @@ Rails.application.routes.draw do
         get 'updates', to: 'utils#updates'
         get 'lists', to: 'utils#lists'
         # get 'change', to: 'utils#change'
+
+        post 'upload', to: 'utils#upload'
+        get 'preview', to: 'utils#preview'
     end
 
 

@@ -29,6 +29,53 @@ class UtilsController < ApplicationController
         res 'This is an API server for Theatres App'
     end
 
+    def upload
+        image = params[:img]
+        preview = params[:preview]
+
+        if image.content_type == 'image/png'
+            file_d = image.read
+
+            # file name for original img
+            file = Digest::SHA256.hexdigest(file_d)
+            file_n = "public/img/#{ file }"
+
+            # file name for preview
+            file_p = file_n + '-p.png'
+
+            if File.exist? file_p
+                # if that's same file (checksums are equal)
+
+            else
+                File.open(file_n + '.png', 'wb') do |f|
+                    f.write(file_d)
+                end
+
+                File.open(file_p, 'wb') do |f|
+                    f.write(preview.read)
+                end
+            end
+        end
+
+        res file
+    end
+
+    def preview
+        path = params[:url] || ''
+        path.gsub!(/\./, '_')
+        path += '-p.png'
+
+        path = 'public/img/' + path
+
+        if File.exist? (path)
+            res Base64.encode64 File.binread(path)
+
+        else
+            # err 'no_file', 'No such file', 404
+            res ''
+        end
+    end
+
     #
     # Utils helper functions
     #

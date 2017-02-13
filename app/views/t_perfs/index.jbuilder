@@ -1,5 +1,5 @@
 json.response @models do |m|
-    json.(m, :id, :desc, :desc_s)
+    json.(m, :id, :desc, :desc_s, :img)
 
     json.perf(m.perf, :id, :name, :author)
     json.type(m.perf.p_type, :id, :name)
