@@ -12,7 +12,8 @@ class UtilsController < ApplicationController
     T_LISTS = %w(t_halls t_performances articles actors u_apis)
 
     def lists
-        res get_hash params[:name]
+        hash = get_hash params[:name]
+        res hash unless hash == 'ERROR' # Dirty fix for 'multiple responses' error
     end
 
     # noinspection RailsChecklist01
@@ -55,6 +56,8 @@ class UtilsController < ApplicationController
                     f.write(preview.read)
                 end
             end
+        else
+            file = ''
         end
 
         res file
@@ -99,8 +102,11 @@ class UtilsController < ApplicationController
             # Conditions
             sql += get_conditions(type)
 
-            PType.find_by_sql(sql)
-
+            if sql.include? 'ERROR'
+                'ERROR'
+            else
+                PType.find_by_sql(sql)
+            end
         else
             # TODO: Log error
         end
@@ -118,6 +124,10 @@ class UtilsController < ApplicationController
 
         if allowed_tables.include? type
             rows = get_list (type)
+            if rows == 'ERROR' # Dirty fix for 'multiple responses' error
+                return 'ERROR'
+            end
+
             r = {}
 
             rows.each { |v|
@@ -125,7 +135,6 @@ class UtilsController < ApplicationController
             }
 
             r
-
         elsif allowed_tran.include? type
             a = ::I18n.t("g_#{type}s").clone # Because Translation is given by reference. REFERENCE.
 
@@ -230,10 +239,12 @@ class UtilsController < ApplicationController
         sql = ' WHERE '
 
         if T_LISTS.include? type
-            # check_api_token
+            check_api_token
 
             if @current_user && @current_user.theatre_id != 0
                 sql += 'theatre_id = ' + @current_user.theatre_id.to_s
+            else
+                return 'ERROR'
             end
 
         elsif type == 'u_perms'
