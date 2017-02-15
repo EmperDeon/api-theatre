@@ -43,6 +43,9 @@ Rails.application.routes.draw do
     res 't_halls'
     res 'u_apis'
 
+    post 'perfs/approve', as: '', to: 'perfs#approve'
+    res 'perfs'
+
     res 't_perfs'
     res 'posters'
     res 'posts'

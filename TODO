@@ -1,6 +1,7 @@
 TODO: !Important! Write tests
 TODO: Play with GD2 gem (image creation)
+TODO: !Important! Add statistics
 
-TODO: Add to global performances (Performance) columns theatre_id, approved - for Admin approving
-TODO:  if not approved, show only to Theatre users with theatre_id
-TODO:  if approved, show to all
+TODO: Add comments, reviews, ratings (As resources maybe ?)
+TODO: Add hall rendering (see GD2)
+TODO: Add tickets, booking and buying. Maybe tickets encoding (like qr, or barcode)

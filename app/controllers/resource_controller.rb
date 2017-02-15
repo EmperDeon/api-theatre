@@ -25,11 +25,18 @@ class ResourceController < ApplicationController
 
     # These called from routes
     def index
-        @models = model_class.order(id: :desc)
-        if params[:del] && params[:del] == 'true'
-            @models = @models.with_deleted
+        if params[:only_deleted] == 'true' # For 'deleted' tab in admin app
+            @models = model_class.deleted
+
+        else
+            @models = model_class.order(id: :desc)
+
+            if params[:with_deleted] == 'true'
+                @models = @models.with_deleted
+            end
+
+            @models = @models.by_user(@current_user)
         end
-        @models = @models.by_user(@current_user)
     end
 
     def show
@@ -108,8 +115,6 @@ class ResourceController < ApplicationController
             elsif perm == '_restore' # Because if user can destroy, he should be able to restore
                 perm = '_destroy'
 
-            else
-                perm = perm
             end
 
             perm = path + perm

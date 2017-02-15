@@ -1,10 +1,6 @@
 class TheatresController < ResourceController
     MODEL_CLASS = ::Theatre
 
-    def index
-        @models = Theatre.with_deleted
-    end
-
     # noinspection RailsChecklist01
     def create_action
         t = Theatre.create!(post_params)

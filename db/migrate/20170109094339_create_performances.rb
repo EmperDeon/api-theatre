@@ -6,6 +6,8 @@ class CreatePerformances < ActiveRecord::Migration[5.0]
             t.string :name
             t.string :author
 
+            t.integer :approved, default: 0
+
             t.timestamps
             t.datetime :deleted_at
         end

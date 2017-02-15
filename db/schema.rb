@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
         t.integer "p_type_id"
         t.string "name"
         t.string "author"
+        t.integer "approved", default: 0
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"
