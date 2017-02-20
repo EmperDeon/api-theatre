@@ -124,8 +124,8 @@ class ResourceController < ApplicationController
         end
 
         # Check, is current user has needed permission
-        unless @current_user.has_perm? perm
-            err 'no_access', 'Not enough permissions to perform action ' + perm, 405
-        end
+        # unless @current_user.has_perm? perm
+        #     err 'no_access', 'Not enough permissions to perform action ' + perm, 405
+        # end
     end
 end

@@ -1,5 +1,5 @@
 class UtilsController < ApplicationController
-    # before_action :check_api_token
+    before_action :check_api_token, only: [:get_deleted]
 
     # Allowed lists
     A_LISTS = %w(articles posters performances theatres p_types t_performances t_halls u_apis u_perms)
@@ -9,27 +9,49 @@ class UtilsController < ApplicationController
     E_LISTS_C = %w(articles performances theatres p_types t_halls)
 
     # Tables, with column theatre_id
-    T_LISTS = %w(t_halls t_performances articles actors u_apis)
+    T_LISTS = %w(t_halls t_performances articles actors u_apis theatres)
 
     def lists
         hash = get_hash params[:name]
         res hash unless hash == 'ERROR' # Dirty fix for 'multiple responses' error
     end
 
+    def hashes
+        hash = get_hash params[:name]
+        res hash unless hash == 'ERROR' # Dirty fix for 'multiple responses' error
+    end
+
     # noinspection RailsChecklist01
     def updates
+        # stamp = Time.at(params[:stamp].to_i ||= 0)
+        #
+        # @articles = Article.updated_since(stamp).includes(:theatre)
+        # @posters = Poster.updated_since(stamp).includes(:t_perf)
+        # @p_types = PType.updated_since(stamp)
+        # @theatres = Theatre.updated_since(stamp).includes(:t_perfs)
+
         stamp = Time.at(params[:stamp].to_i ||= 0)
 
-        @articles = Article.updated_since(stamp).includes(:theatre)
-        @posters = Poster.updated_since(stamp).includes(:t_perf)
-        @p_types = PType.updated_since(stamp)
-        @theatres = Theatre.updated_since(stamp).includes(:t_perfs)
+        r = {
+            articles: Article.updated_since(stamp),
+            p_types: PType.updated_since(stamp),
+            performances: Performance.updated_since(stamp),
+            posters: Poster.updated_since(stamp),
+            t_halls: THall.updated_since(stamp),
+            t_performances: TPerformance.updated_since(stamp),
+            theatres: Theatre.updated_since(stamp),
+        }
+
+        res r
     end
 
     def root
         res 'This is an API server for Theatres App'
     end
 
+    #
+    # Images module
+    #
     def upload
         image = params[:img]
         preview = params[:preview]
@@ -77,6 +99,45 @@ class UtilsController < ApplicationController
             # err 'no_file', 'No such file', 404
             res ''
         end
+    end
+
+    #
+    # Get deleted rows
+    #
+    def get_deleted
+        r = [
+            get_del(::Article),
+            get_del(::PType),
+            get_del(::Performance),
+            get_del(::Poster),
+            get_del(::THall),
+            get_del(::TPerformance),
+            get_del(::Theatre)
+        ]
+
+        res r.compact
+    end
+
+    def get_del (cl)
+        deleted = cl.deleted
+        if deleted.length == 0 # If no deleted rows
+            return nil
+        end
+
+        a = {}
+
+        name = cl.name
+        name.insert(1, '_') if /[A-Z]/ =~ name[1]
+        name.downcase!
+        name += 's'
+
+        name.gsub!('performances', 'perfs')
+
+        a['arr'] = deleted
+        a['path'] = name
+        a['name'] = I18n.t("model-desc-#{name}")
+
+        a
     end
 
     #
@@ -241,10 +302,17 @@ class UtilsController < ApplicationController
         if T_LISTS.include? type
             check_api_token
 
-            if @current_user && @current_user.theatre_id != 0
-                sql += 'theatre_id = ' + @current_user.theatre_id.to_s
-            else
+            unless @current_user
                 return 'ERROR'
+            end
+
+            id = @current_user.theatre_id
+
+            if type == 'theatres' && id != 0
+                sql += 'id = ' + id.to_s
+
+            elsif id != 0
+                sql += 'theatre_id = ' + id.to_s
             end
 
         elsif type == 'u_perms'

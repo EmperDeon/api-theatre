@@ -6,7 +6,7 @@ class THall < ResourceRecord
     # Relations
     #
     belongs_to :theatre
-    has_many :t_perfs, class_name: 'TPerformance', inverse_of: :t_hall
+    has_many :t_perfs, class_name: 'TPerformance', inverse_of: :t_hall, dependent: :destroy
 
 
     #

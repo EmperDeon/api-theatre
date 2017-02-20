@@ -6,7 +6,6 @@ class Poster < ResourceRecord
     # Relations
     #
     belongs_to :t_perf, class_name: 'TPerformance'
-    belongs_to :t_hall
 
 
     #

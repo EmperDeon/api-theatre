@@ -30,10 +30,13 @@ Rails.application.routes.draw do
     scope '/utils' do
         get 'updates', to: 'utils#updates'
         get 'lists', to: 'utils#lists'
+        get 'hashes', to: 'utils#hashes'
         # get 'change', to: 'utils#change'
 
         post 'upload', to: 'utils#upload'
         get 'preview', to: 'utils#preview'
+
+        get 'deleted', to: 'utils#get_deleted'
     end
 
 

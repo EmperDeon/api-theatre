@@ -3,11 +3,16 @@ class Theatre < ResourceRecord
     FILLABLE = [:name, :desc, :img, :address, :tel_num]
 
     #
-    # Scopes
+    # Relations
     #
     has_many :t_halls
     has_many :t_perfs, class_name: 'TPerformance'
 
+
+    #
+    # Scopes
+    #
+    scope :by_user, -> (user = nil) {}
 
     #
     # Validations

@@ -1,5 +1,5 @@
 json.response do
-    json.(@model, :name, :img, :desc, :address, :tel_num)
+    json.(@model, :id, :name, :img, :desc, :address, :tel_num)
 
     json.t_halls @model.t_halls, :id, :name
 

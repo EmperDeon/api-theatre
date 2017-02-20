@@ -28,5 +28,7 @@ module TheatresAPI
         config.api_only = true
 
         config.autoload_paths << Rails.root.join('lib/jwt')
+
+        config.i18n.default_locale = :'ru-RU'
     end
 end

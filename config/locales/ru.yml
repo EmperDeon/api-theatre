@@ -1,0 +1,9 @@
+ru-RU:
+  model-desc-articles: 'Новости'
+  model-desc-p_types: 'Типы спектаклей'
+  model-desc-perfs: 'Глобальные спектакли'
+  model-desc-posters: 'Афиша'
+  model-desc-t_halls: 'Залы'
+  model-desc-t_perfs: 'Спектакли в театре'
+  model-desc-theatres: 'Театры'
+#  model-desc-: ''

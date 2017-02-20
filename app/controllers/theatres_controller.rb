@@ -17,10 +17,11 @@ class TheatresController < ResourceController
 
         halls = JSON.parse (params[:t_halls_new] ||= '[]')
         halls.each { |name|
-            THall.create!(name: name, theatre_id: t.id, json: '{}')
+            THall.create!(name: name, theatre_id: @model.id, json: '{}')
         }
 
         halls = JSON.parse (params[:t_halls_del] ||= '[]')
+
         halls.each { |id|
             THall.destroy(id)
         }

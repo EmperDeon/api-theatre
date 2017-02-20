@@ -19,14 +19,15 @@ class TPerfsController < ResourceController
     end
 
     def update_action
+
         if params.has_key? :perf_new
             perf_par = JSON.parse(params[:perf_new])
             perf = Performance.create!(perf_par + {approved: @current_user.theatre_id})
-        else
-            perf = Performance.find(params[:perf_id])
+            @model.perf = perf
+        elsif params.has_key? :perf_id
+            @model.perf = Performance.find(params[:perf_id])
         end
 
-        @model.perf = perf
         @model.theatre_id = @current_user.theatre_id
         @model.update!(post_params)
     end

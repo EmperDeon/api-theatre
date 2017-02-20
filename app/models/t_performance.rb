@@ -9,7 +9,7 @@ class TPerformance < ResourceRecord
     belongs_to :t_hall
     belongs_to :perf, class_name: 'Performance'
 
-    has_many :posters, foreign_key: 't_perf_id', inverse_of: :t_perf
+    has_many :posters, foreign_key: 't_perf_id', inverse_of: :t_perf, dependent: :destroy
 
 
     #
@@ -27,7 +27,6 @@ class TPerformance < ResourceRecord
 
     scope :by_type, -> (id) { joins(:perf).where(performances: {type_id: id}) if id }
     scope :by_name, -> (id) { where(perf_id: id) if id }
-    scope :by_theatre, -> (id) { where(theatre_id: id) if id }
 
 
     #
