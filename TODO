@@ -10,3 +10,6 @@ TODO: 'Roles' - Admin/Moderator lists [UtilsController.conditions.theatre_list]
 TODO: Add hall rendering (see GD2)
 
 TODO: Bookmarks
+
+TODO: Refactor perms (only list and edit[create, edit, destroy, restore] for models)
+TODO: Utils.Deleted return only current theatre

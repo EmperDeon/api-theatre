@@ -10,6 +10,8 @@ class CreateUApis < ActiveRecord::Migration[5.0]
             t.string :tel_num
             t.string :position
 
+            t.text :json, default: '{}'
+
             t.timestamps
             t.datetime :deleted_at
 

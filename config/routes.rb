@@ -20,6 +20,8 @@ Rails.application.routes.draw do
         match 'new', to: 'auth#api_auth', via: [:get, :post]
         post 'check', to: 'auth#api_check'
         post 'perms', to: 'auth#api_perms'
+        post 'get_settings', to: 'auth#api_get_settings'
+        post 'set_settings', to: 'auth#api_set_settings'
     end
 
     scope '/auth_web' do
