@@ -1,4 +1,4 @@
-class ResourceController < ApplicationController
+class ApiResourceController < ApplicationController
     # Controller for 'resources', like articles, theatres, etc.
 
     #

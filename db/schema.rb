@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 20170115164604) do
 
     create_table "u_webs", force: :cascade do |t|
         t.string "login"
-        t.string "password"
+        t.string "password_digest"
         t.string "fio"
         t.string "tel_num"
         t.datetime "created_at", null: false

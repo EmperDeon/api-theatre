@@ -13,3 +13,5 @@ TODO: Bookmarks
 
 TODO: Refactor perms (only list and edit[create, edit, destroy, restore] for models)
 TODO: Utils.Deleted return only current theatre
+
+TODO: Move perms, get and set_settings to separate route 'u_apis'.

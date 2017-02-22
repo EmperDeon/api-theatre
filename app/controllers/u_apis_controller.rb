@@ -1,26 +1,22 @@
-class UApisController < ResourceController
-    MODEL_CLASS = ::UApi
+class UApisController < ApplicationController
+    before_action :check_api_token, only: [:api_perms, :api_get_settings, :api_set_settings]
 
-    def index
-        @models = UApi.by_user(@current_user).where('login <> "admin"')
+    def api_perms
+        res @current_user.u_perms.collect { |h| h.perm }
     end
 
-    def create_action
-        u = UApi.new(post_params)
-        u.theatre_id = @current_user.theatre_id
-        u.save!
+    def api_get_settings
+        if params[:key]
+            res (JSON.parse @current_user.json)[params[:key]]
+        else
+            res JSON.parse @current_user.json
+        end
 
-        perms = JSON.parse(params[:perms] || '[]')
-        u.u_perms << UPerm.find(perms.to_a)
     end
 
-    def update_action
-        u = @model
-        u.theatre_id = @current_user.theatre_id
-        u.update!(post_params)
+    def api_set_settings
+        @current_user.update!(json: (params[:settings] || '{}'))
 
-        perms = JSON.parse(params[:perms] || '[]')
-        u.u_perms.clear
-        u.u_perms << UPerm.find(perms.to_a)
+        res 'ok'
     end
 end
