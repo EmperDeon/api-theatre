@@ -25,10 +25,12 @@ Rails.application.routes.draw do
         # get 'change', to: 'utils#change'
     end
 
-    scope '/u_webs' do
-        post 'register', to: 'u_webs#register'
-        post 'update', to: 'u_webs#update'
-    end
+
+    #
+    # API routes
+    #  Used by: TheatreAdmin app
+    #  TODO: Maybe scope all API routes
+    #
 
     # Generates 'CRUD' routes for specified controller
     #  Why not 'resources :name' ?
@@ -61,6 +63,23 @@ Rails.application.routes.draw do
     api_res 't_perfs'
     api_res 'posters'
     api_res 'posts'
+
+
+    #
+    # Web-API routes
+    #  Used by: Mobile app
+    #
+    #
+
+    scope '/u_webs' do
+        post 'register', to: 'u_webs#register'
+        post 'update', to: 'u_webs#update'
+    end
+
+    scope module: 't_web' do
+        post 'comments/new', to: 'comments#new'
+    end
+
 
     root 'utils#root'
 end
