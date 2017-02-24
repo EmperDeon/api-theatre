@@ -16,6 +16,12 @@ namespace :db do
             system('rake db:seed RAILS_ENV=development')
 
             system('rake db:migrate RAILS_ENV=test')
+
+        elsif Rails.env.production?
+            Rake::Task['db:drop'].invoke
+            Rake::Task['db:create'].invoke
+            Rake::Task['db:migrate'].invoke
+            Rake::Task['db:seed'].invoke
         end
     end
 
