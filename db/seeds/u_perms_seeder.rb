@@ -9,9 +9,8 @@ end
 #
 #   name:: Permission name
 #   add:: Additional permissions
-def create_u_perms (name, add = [])
-    perms = %w(_create _update _destroy)
-    perms += add
+def create_res_perms (name, add = [])
+    perms = %w(_edit) + add
 
     create_u_perm(name)
     perms.each { |v|
@@ -30,19 +29,20 @@ def add_perms_to_user (user, perms)
 end
 
 
-create_u_perms 'theatres'
-create_u_perms 'u_apis'
-create_u_perms 'actors'
-create_u_perms 'perfs'
-create_u_perms 'posters'
-create_u_perms 'articles'
-create_u_perms 't_perfs'
+create_res_perms 'theatres' # 1, 2
+create_res_perms 'u_apis' # 3, 4
 
-create_u_perm('theatre_choose')
+create_res_perms 'actors' # 5, 6
+create_res_perms 'perfs' # 7, 8
+create_res_perms 'posters' # 9, 10
+create_res_perms 'articles' # 11, 12
+create_res_perms 't_perfs' # 13, 14
+
+create_u_perm('theatre_choose') # 15
 
 
-add_perms_to_user 1, (1..29) # Admin
-add_perms_to_user 2, (5..28) # Theatre admin
+add_perms_to_user 1, (1..15) # Admin
+add_perms_to_user 2, (3..14) # Theatre admin
 
-add_perms_to_user 3, (13..21).to_a + (25..28).to_a # Theatre users
-add_perms_to_user 4, (21..24)
+add_perms_to_user 3, (3..10).to_a + (13..14).to_a # Theatre users
+add_perms_to_user 4, (11..12)
