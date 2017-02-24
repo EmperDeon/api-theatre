@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20170222081801) do
         t.string "fio"
         t.string "tel_num"
         t.string "position"
-        t.text "json", default: "{}"
+        t.text "json"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
         t.datetime "deleted_at"

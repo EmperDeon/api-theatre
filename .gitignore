@@ -47,4 +47,6 @@ bower.json
 
 .idea/
 public/img/*.png
+!public/img/no_img.png
+
 public/none-o.png
