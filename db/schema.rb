@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20170222081801) do
     create_table "actors_t_performances", id: false, force: :cascade do |t|
         t.integer "t_performance_id", null: false
         t.integer "actor_id", null: false
+        t.index ["t_performance_id", "actor_id"], name: "index_actors_t_performances_on_t_performance_id_and_actor_id", unique: true
     end
 
     create_table "articles", force: :cascade do |t|

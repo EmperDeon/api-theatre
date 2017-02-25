@@ -17,13 +17,13 @@ class Poster < ResourceRecord
 
     #
     # Scopes
-    # TODO: Rewrite without 'then'
-    scope :by_month, -> (month) { where('MONTH(date) = ?', month) if month }
-    scope :by_day, -> (day) { where('DAYOFWEEK(date) = ?', day) if day }
-    scope :by_time, -> (time) { where('DATE_FORMAT(date, \'%H:%i\') = ?', get_time(time)) if time }
-
-    scope :by_type, -> (id) { where(t_perf_id: TPerformance::by_type(id)) if id }
-    scope :by_name, -> (id) { where(t_perf_id: TPerformance::by_name(id)) if id }
+    #
+    # scope :by_month, -> (month) { where('MONTH(date) = ?', month) if month }
+    # scope :by_day, -> (day) { where('DAYOFWEEK(date) = ?', day) if day }
+    # scope :by_time, -> (time) { where('DATE_FORMAT(date, \'%H:%i\') = ?', get_time(time)) if time }
+    #
+    # scope :by_type, -> (id) { where(t_perf_id: TPerformance::by_type(id)) if id }
+    # scope :by_name, -> (id) { where(t_perf_id: TPerformance::by_name(id)) if id }
     scope :by_theatre, -> (id) { where(t_perf_id: TPerformance::by_theatre(id)) if id }
     scope :by_user, -> (id) { by_theatre(id) }
 

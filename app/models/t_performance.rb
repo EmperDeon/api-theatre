@@ -10,6 +10,7 @@ class TPerformance < ResourceRecord
     belongs_to :perf, class_name: 'Performance'
 
     has_many :posters, foreign_key: 't_perf_id', inverse_of: :t_perf, dependent: :destroy
+    has_and_belongs_to_many :actors, through: :actors_t_performances
 
 
     #
