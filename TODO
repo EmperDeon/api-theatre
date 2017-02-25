@@ -15,3 +15,4 @@ TODO: Refactor perms (only list and edit[create, edit, destroy, restore] for mod
 TODO: Utils.Deleted return only current theatre
 
 TODO: Move perms, get and set_settings to separate route 'u_apis'.
+
