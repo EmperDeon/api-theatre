@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class UtilsController < ApplicationController
     before_action :check_api_token, only: [:get_deleted]
 
@@ -76,6 +78,11 @@ class UtilsController < ApplicationController
                     f.write(preview.read)
                 end
             end
+
+            if Rails.env.production?
+                Cloudinary::Uploader.upload file_n + '.png', public_id: file
+                Cloudinary::Uploader.upload file_n + '-p.png', public_id: file + '-p'
+            end
         else
             file = ''
         end
@@ -88,13 +95,17 @@ class UtilsController < ApplicationController
         path.gsub!(/\./, '_')
         path += '-p.png'
 
-        path = 'public/img/' + path
+        if Rails.env.production?
+            path = ENV['API_SERVER_PATH'] + path
 
-        if File.exist? (path)
-            res Base64.encode64 File.binread(path)
+            res Base64.encode64 open(path, 'rb') { |f| f.read }
 
+        elsif File.exist? ('public/img/' + path)
+            path = 'public/img/' + path
+            logger.warn path
+
+            res Base64.encode64 open(path, 'rb') { |f| f.read }
         else
-            # err 'no_file', 'No such file', 404
             res ''
         end
     end
