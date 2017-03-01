@@ -114,6 +114,9 @@ class ApiResourceController < ApplicationController
 
             elsif %w(_create _update _restore _destroy).include? perm
                 perm = '_edit'
+
+            elsif perm == '_approval'
+                perm = '_approve'
             end
 
             perm = path + perm

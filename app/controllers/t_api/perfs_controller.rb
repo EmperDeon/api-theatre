@@ -21,18 +21,19 @@ module TApi
 
         end
 
+        def approval
+            @models = Performance.where('approved > 0')
+            @theatres = Theatre.all
+        end
+
         def approve
-            v = params[:state]
+            v = params[:approved]
             if v
-                if v == '0'
-                    v = 0
-                elsif v == '1'
-                    v = @current_user.theatre_id
-                else
-                    v = -1
+                if v.to_i < 0
+                    v = '-1'
                 end
 
-                @model.update!(approved: v)
+                @model.update!({approved: v}.merge params.permit(:author, :name, :p_type_id))
             end
 
             res 'approve_ok', :ok

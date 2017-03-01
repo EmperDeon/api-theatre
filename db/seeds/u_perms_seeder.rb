@@ -39,10 +39,12 @@ create_res_perms 'articles' # 11, 12
 create_res_perms 't_perfs' # 13, 14
 
 create_u_perm('theatre_choose') # 15
+create_u_perm('perfs_approve') # 16
 
 
-add_perms_to_user 1, (1..15) # Admin
+add_perms_to_user 1, (1..16) # Admin
 add_perms_to_user 2, (3..14) # Theatre admin
+add_perms_to_user 5, (3..14) # Theatre admin
 
 add_perms_to_user 3, (3..10).to_a + (13..14).to_a # Theatre users
 add_perms_to_user 4, (11..12)

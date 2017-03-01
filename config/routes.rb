@@ -50,7 +50,8 @@ Rails.application.routes.draw do
         end
     end
 
-    post 'perfs/approve', as: '', to: 'perfs#approve'
+    post 'perfs/approval', as: '', to: 't_api/perfs#approval'
+    post 'perfs/approve', as: '', to: 't_api/perfs#approve'
 
     api_res 'articles'
     api_res 'actors'

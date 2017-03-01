@@ -13,6 +13,9 @@ class UtilsController < ApplicationController
     # Tables, with column theatre_id
     T_LISTS = %w(t_halls t_performances articles actors u_apis theatres)
 
+    # Tables, with deleted_at column
+    T_DELETABLE = %w(t_halls)
+
     def lists
         hash = get_hash params[:name]
         res hash unless hash == 'ERROR' # Dirty fix for 'multiple responses' error
@@ -306,7 +309,7 @@ class UtilsController < ApplicationController
     # Get conditions if needed
     #
     def get_conditions(type)
-        sql = ' WHERE '
+        sql = ' WHERE ' + (T_DELETABLE.include?(type) ? 'deleted_at IS NULL AND ' : '')
 
         if T_LISTS.include? type
             check_api_token
@@ -328,6 +331,11 @@ class UtilsController < ApplicationController
             sql += "perm NOT LIKE 'theatres%'"
         end
 
-        sql == ' WHERE ' ? '' : sql
+        # Return
+        if T_DELETABLE.include? type
+            sql
+        else
+            sql == ' WHERE ' ? '' : sql
+        end
     end
 end
