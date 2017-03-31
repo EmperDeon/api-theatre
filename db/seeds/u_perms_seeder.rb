@@ -28,23 +28,27 @@ def add_perms_to_user (user, perms)
     }
 end
 
+# Global Admin
+create_u_perm('theatre_choose') # 1
+create_u_perm('perfs_approve') # 2
+create_res_perms 'theatres' # 3, 4
 
-create_res_perms 'theatres' # 1, 2
-create_res_perms 'u_apis' # 3, 4
+# Theatre admin
+create_res_perms 'u_apis' # 5, 6
 
-create_res_perms 'actors' # 5, 6
-create_res_perms 'perfs' # 7, 8
-create_res_perms 'posters' # 9, 10
-create_res_perms 'articles' # 11, 12
-create_res_perms 't_perfs' # 13, 14
+# Theatre users
+create_res_perms 'actors' # 7, 8
+create_res_perms 'perfs' # 9, 10
+create_res_perms 'posters' # 11, 12
+create_res_perms 'articles' # 13, 14
+create_res_perms 't_perfs' # 15, 16
+create_res_perms 't_halls' # 17, 18
+create_res_perms 't_prices' # 19, 20
 
-create_u_perm('theatre_choose') # 15
-create_u_perm('perfs_approve') # 16
 
+add_perms_to_user 1, (1..20) # Admin
+add_perms_to_user 2, (5..20) # Theatre admin
+add_perms_to_user 5, (5..20) # Theatre admin
 
-add_perms_to_user 1, (1..16) # Admin
-add_perms_to_user 2, (3..14) # Theatre admin
-add_perms_to_user 5, (3..14) # Theatre admin
-
-add_perms_to_user 3, (3..10).to_a + (13..14).to_a # Theatre users
-add_perms_to_user 4, (11..12)
+add_perms_to_user 3, (7..12).to_a + (15..20).to_a # Theatre users
+add_perms_to_user 4, (13..15)

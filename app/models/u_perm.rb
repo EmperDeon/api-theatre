@@ -1,3 +1,3 @@
 class UPerm < ApplicationRecord
-    validates :perm, uniqueness: true
+	validates :perm, uniqueness: true
 end
