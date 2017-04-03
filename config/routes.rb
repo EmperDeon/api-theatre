@@ -24,6 +24,9 @@ Rails.application.routes.draw do
 
 		get 'deleted', to: 'utils#get_deleted'
 		# get 'change', to: 'utils#change'
+
+		get 'form_json', to: 'utils#form_json'
+		post 'set_json', to: 'utils#set_json'
 	end
 
 

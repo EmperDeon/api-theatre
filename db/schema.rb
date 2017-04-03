@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222081801) do
+ActiveRecord::Schema.define(version: 20170403085554) do
 
 	create_table "actors", force: :cascade do |t|
 		t.integer "theatre_id"
@@ -69,9 +69,17 @@ ActiveRecord::Schema.define(version: 20170222081801) do
 	create_table "posters", force: :cascade do |t|
 		t.integer "t_perf_id"
 		t.datetime "date"
+		t.text "price"
 		t.datetime "created_at", null: false
 		t.datetime "updated_at", null: false
 		t.datetime "deleted_at"
+	end
+
+	create_table "seats", force: :cascade do |t|
+		t.integer "poster_id"
+		t.string "seat"
+		t.float "price"
+		t.index ["poster_id"], name: "index_seats_on_poster_id"
 	end
 
 	create_table "t_halls", force: :cascade do |t|
@@ -93,17 +101,6 @@ ActiveRecord::Schema.define(version: 20170222081801) do
 		t.datetime "created_at", null: false
 		t.datetime "updated_at", null: false
 		t.datetime "deleted_at"
-	end
-
-	create_table "t_prices", force: :cascade do |t|
-		t.integer "poster_id"
-		t.integer "t_hall_id"
-		t.text "json"
-		t.datetime "created_at", null: false
-		t.datetime "updated_at", null: false
-		t.datetime "deleted_at"
-		t.index ["poster_id"], name: "index_t_prices_on_poster_id"
-		t.index ["t_hall_id"], name: "index_t_prices_on_t_hall_id"
 	end
 
 	create_table "theatres", force: :cascade do |t|

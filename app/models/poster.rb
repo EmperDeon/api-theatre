@@ -1,6 +1,6 @@
 class Poster < ResourceRecord
 	# Allowed for mass-assignment fields. For get_params in ResourceController
-	FILLABLE = [:t_perf_id, :date]
+	FILLABLE = [:t_perf_id, :date, :price]
 
 	#
 	# Relations

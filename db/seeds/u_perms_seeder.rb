@@ -43,12 +43,11 @@ create_res_perms 'posters' # 11, 12
 create_res_perms 'articles' # 13, 14
 create_res_perms 't_perfs' # 15, 16
 create_res_perms 't_halls' # 17, 18
-create_res_perms 't_prices' # 19, 20
 
 
-add_perms_to_user 1, (1..20) # Admin
-add_perms_to_user 2, (5..20) # Theatre admin
-add_perms_to_user 5, (5..20) # Theatre admin
+add_perms_to_user 1, (1..18) # Admin
+add_perms_to_user 2, (5..18) # Theatre admin
+add_perms_to_user 5, (5..18) # Theatre admin
 
-add_perms_to_user 3, (7..12).to_a + (15..20).to_a # Theatre users
+add_perms_to_user 3, (7..12).to_a + (15..18).to_a # Theatre users
 add_perms_to_user 4, (13..15)

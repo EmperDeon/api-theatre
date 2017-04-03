@@ -4,6 +4,7 @@ class CreatePosters < ActiveRecord::Migration[5.0]
             t.integer :t_perf_id
 
             t.datetime :date
+            t.text :price
 
             t.timestamps
             t.datetime :deleted_at

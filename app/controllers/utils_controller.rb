@@ -224,6 +224,23 @@ class UtilsController < ApplicationController
 		end
 	end
 
+	#
+	# Set json for web-app
+	#
+	def set_json
+		File.open('public/json.json', 'wb') do |f|
+			f.write(params[:json])
+		end
+
+		render json: {response: 'successful'}
+	end
+
+	#
+	# Get form for web-app
+	#
+	def form_json
+		render template: 'utils/form_json'
+	end
 
 	#
 	# Lists for 'special' or 'unique' types
