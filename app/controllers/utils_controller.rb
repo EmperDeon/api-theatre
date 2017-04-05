@@ -4,14 +4,14 @@ class UtilsController < ApplicationController
 	before_action :check_api_token, only: [:get_deleted]
 
 	# Allowed lists
-	A_LISTS = %w(articles posters performances theatres p_types t_performances t_halls u_apis u_perms)
-	A_HASHES = %w(articles posters performances theatres p_types t_performances t_halls u_apis u_perms)
+	A_LISTS = %w(actors articles posters performances theatres p_types t_performances t_halls u_apis u_perms)
+	A_HASHES = %w(actors articles posters performances theatres p_types t_performances t_halls u_apis u_perms)
 
 	# Easy to access tables (table has id and name columns)
-	E_LISTS_C = %w(articles performances theatres p_types t_halls)
+	E_LISTS_C = %w(actors articles performances theatres p_types t_halls)
 
 	# Tables, with column theatre_id
-	T_LISTS = %w(t_halls t_performances articles actors u_apis theatres)
+	T_LISTS = %w(actors t_halls t_performances articles actors u_apis theatres)
 
 	# Tables, with deleted_at column
 	T_DELETABLE = %w(t_halls)
@@ -345,7 +345,7 @@ class UtilsController < ApplicationController
 			end
 
 		elsif type == 'u_perms'
-			sql += "perm NOT LIKE 'theatres%'"
+			sql += "perm NOT LIKE 'theatres%' AND perm NOT LIKE '%approve' AND perm NOT LIKE '%choose'"
 		end
 
 		# Return

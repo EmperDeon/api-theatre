@@ -5,6 +5,6 @@ json.response do
 	json.perf(@model.perf, :id, :name, :author)
 	json.type(@model.perf.p_type, :id, :name)
 	json.hall(@model.t_hall, :id, :name)
-
+	json.actor_ids @model.actor_ids
 	json.timestamps(@model, :created_at, :updated_at, :deleted_at)
 end

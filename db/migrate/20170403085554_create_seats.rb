@@ -5,6 +5,7 @@ class CreateSeats < ActiveRecord::Migration[5.0]
 
 			t.string :seat
 			t.float :price
+			t.boolean :sell
 		end
 	end
 end

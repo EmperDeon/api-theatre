@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403085554) do
+ActiveRecord::Schema.define(version: 20170403131042) do
 
 	create_table "actors", force: :cascade do |t|
 		t.integer "theatre_id"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170403085554) do
 		t.integer "poster_id"
 		t.string "seat"
 		t.float "price"
+		t.boolean "sell"
 		t.index ["poster_id"], name: "index_seats_on_poster_id"
 	end
 
@@ -112,6 +113,16 @@ ActiveRecord::Schema.define(version: 20170403085554) do
 		t.datetime "created_at", null: false
 		t.datetime "updated_at", null: false
 		t.datetime "deleted_at"
+	end
+
+	create_table "tickets", force: :cascade do |t|
+		t.integer "user_id"
+		t.integer "poster_id"
+		t.string "ticket"
+		t.datetime "created_at", null: false
+		t.datetime "updated_at", null: false
+		t.index ["poster_id"], name: "index_tickets_on_poster_id"
+		t.index ["user_id"], name: "index_tickets_on_user_id"
 	end
 
 	create_table "u_apis", force: :cascade do |t|
