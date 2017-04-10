@@ -121,7 +121,7 @@ module TApi
 				c.color = GD2::Color.new(233, 233, 233)
 				c.rectangle(0, 0, w * cs, h * cs, true)
 
-				c.font = GD2::Font::TrueType.new('C:\Windows\Fonts\tahoma.ttf', 9)
+				c.font = GD2::Font::TrueType.new('public/DejaVuSans.ttf', 9)
 
 				(0...w).each { |x|
 					(0...h).each { |y|
