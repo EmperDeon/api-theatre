@@ -17,9 +17,7 @@ module TApi
 			THall.create({theatre_id: @current_user.theatre_id, name: params[:name], json: params[:json]})
 		end
 
-		private
 		def get_preview_for_hall (id)
-			# TODO: Draw
 			Base64.encode64 get_image(id) #File.binread(Rails.public_path + 'none.png')
 		end
 
@@ -109,34 +107,12 @@ module TApi
 						break
 					end
 				end
-
-				#int x = s.x, y = s.y, st = s.st, i = getCell(x, y), curr_s = sect_s[x + y * w];
-				#
-				# while ((i == 0 || i == 1 || i == 3) && x > -1 && x < w && sect_s[x + y * w] == curr_s) {
-				# 	seat_t[x + y * w] = st++;
-				#
-				# x += s.left ? -1 : 1;
-				# i = getCell(x, y);
-				#
-				# if (i == 0 || curr_s == 0) {
-				# 	break;
-				# }
-				# }
 			}
-
-
-			# (0...h).each { |y|
-			# 	s = ''
-			# 	(0...w).each { |x|
-			# 		s += ' ' + seat_r[x + y * w].to_s
-			# 	}
-			# 	logger.warn s
-			# }
-
 
 			save_image draw_image(w, h, cs, seat_n, sect_s, sect_c, seat_r, seat_t)
 		end
 
+		private
 		def self.draw_image(w, h, cs, seat_n, sect_s, sect_c, seat_r, seat_t)
 			i = GD2::Image::TrueColor.new(w * cs, h * cs)
 			# c = GD2::Canvas.new(i)
