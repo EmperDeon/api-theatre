@@ -29,27 +29,31 @@ class UtilsController < ApplicationController
 	# noinspection RailsChecklist01
 	def updates
 		stamp = Time.at(params[:stamp].to_i ||= 0)
-
-		@articles = Article.updated_since(stamp).includes(:theatre)
-		@posters = Poster.updated_since(stamp).includes(t_perf: [{perf: [:p_type]}, :theatre, :t_hall])
-		@p_types = PType.updated_since(stamp)
-		@theatres = Theatre.updated_since(stamp).includes(t_perfs: [{perf: [:p_type]}, :theatre, :t_hall])
-
-		#  r = {
-		#      articles: Article.updated_since(stamp),
-		#      p_types: PType.updated_since(stamp),
-		#      performances: Performance.updated_since(stamp),
-		#      posters: Poster.updated_since(stamp),
-		#      t_halls: THall.updated_since(stamp),
-		#      t_performances: TPerformance.updated_since(stamp),
-		#      theatres: Theatre.updated_since(stamp),
-		#  }
 		#
-		#  res r
+		# @articles = Article.updated_since(stamp).includes(:theatre)
+		# @posters = Poster.updated_since(stamp).includes(t_perf: [{perf: [:p_type]}, :theatre, :t_hall])
+		# @p_types = PType.updated_since(stamp)
+		# @theatres = Theatre.updated_since(stamp).includes(t_perfs: [{perf: [:p_type]}, :theatre, :t_hall])
+
+		r = {
+			articles: Article.updated_since(stamp),
+			p_types: PType.updated_since(stamp),
+			performances: Performance.updated_since(stamp),
+			posters: Poster.updated_since(stamp),
+			t_halls: THall.updated_since(stamp),
+			t_performances: TPerformance.updated_since(stamp),
+			theatres: Theatre.updated_since(stamp),
+		}
+
+		res r
 	end
 
 	def root
 		res 'This is an API server for Theatres App'
+	end
+
+	def get_hall_preview
+		send_file(TApi::THallsController::get_image(params[:id]))
 	end
 
 	#

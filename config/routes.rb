@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-	resources :t_prices
+
 	scope '/auth_api' do
 		match 'new', to: 'auth#api_auth', via: [:get, :post]
 		post 'check', to: 'auth#api_check'
@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
 		get 'form_json', to: 'utils#form_json'
 		post 'set_json', to: 'utils#set_json'
+
+		get 'hall_preview', to: 'utils#get_hall_preview'
 	end
 
 
