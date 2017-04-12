@@ -6,7 +6,7 @@ class CreateTPerformances < ActiveRecord::Migration[5.0]
             t.integer :perf_id
 
             t.string :img
-            t.string :desc_s
+            t.text :desc_s
             t.text :desc
 
             t.timestamps

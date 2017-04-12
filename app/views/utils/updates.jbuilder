@@ -12,7 +12,7 @@ json.response do
 	json.posters @posters do |p|
 		json.(p, :date)
 		json.(p.t_perf, :desc)
-		json.img (ENV['API_SERVER_PATH'] + p.t_perf.img + '.png')
+		json.img (ENV['API_SERVER_PATH'] + 'img/' + p.t_perf.img + '.png')
 		json.(p.t_perf.perf, :author, :name, :p_type_id)
 		json.theatre_name p.t_perf.theatre.name
 		json.hall_name p.t_perf.t_hall.name
@@ -26,7 +26,8 @@ json.response do
 		json.(a, :name, :desc, :img)
 		json.t_perfs a.t_perfs do |p|
 			json.(p.perf, :author, :name, :p_type_id)
-			json.(p, :desc, :img)
+			json.(p, :desc)
+			json.img (ENV['API_SERVER_PATH'] + 'img/' + p.img + '.png')
 			json.hall_name p.t_hall.name
 		end
 	end
