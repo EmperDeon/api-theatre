@@ -1,15 +1,33 @@
-Poster.create!([
-                   {t_perf_id: 1, date: '2016-12-24 19:00:00'},
-                   {t_perf_id: 2, date: '2016-12-24 19:00:00'},
-                   {t_perf_id: 2, date: '2016-12-29 19:00:00'},
-                   {t_perf_id: 3, date: '2016-12-29 20:00:00'},
-                   {t_perf_id: 2, date: '2016-12-30 20:00:00'},
-                   {t_perf_id: 1, date: '2017-01-30 19:00:00'},
-                   {t_perf_id: 4, date: '2017-01-29 19:00:00'},
-                   {t_perf_id: 6, date: '2017-01-29 19:00:00'},
-                   {t_perf_id: 1, date: '2017-03-01 19:00:00'},
-                   {t_perf_id: 4, date: '2017-03-01 19:00:00'},
-                   {t_perf_id: 6, date: '2017-03-01 19:00:00'},
-                   {t_perf_id: 5, date: '2016-12-24 20:00:00'},
-                   {t_perf_id: 6, date: '2016-12-29 19:00:00'}
-               ])
+Poster.create!(
+	[
+		{t_perf_id: 1, date: '2017-04-20 19:00:00', price: ''},
+		{t_perf_id: 2, date: '2017-04-21 19:00:00', price: ''},
+		{t_perf_id: 3, date: '2017-04-22 18:00:00', price: ''},
+		{t_perf_id: 3, date: '2017-06-01 19:00:00', price: ''},
+		{t_perf_id: 4, date: '2017-04-23 18:00:00', price: ''},
+		{t_perf_id: 5, date: '2017-04-18 19:00:00', price: ''},
+		{t_perf_id: 5, date: '2017-05-01 19:00:00', price: ''},
+		{t_perf_id: 6, date: '2017-04-18 19:00:00', price: ''},
+		{t_perf_id: 6, date: '2017-04-23 18:00:00', price: ''},
+		{t_perf_id: 6, date: '2017-05-13 18:00:00', price: ''},
+		{t_perf_id: 6, date: '2017-05-27 18:00:00', price: ''},
+		{t_perf_id: 7, date: '2017-04-19 19:00:00', price: ''},
+		{t_perf_id: 7, date: '2017-05-05 19:00:00', price: ''},
+		{t_perf_id: 8, date: '2017-04-21 19:00:00', price: ''},
+		{t_perf_id: 8, date: '2017-04-29 18:00:00', price: ''},
+		{t_perf_id: 8, date: '2017-05-02 19:00:00', price: ''},
+		{t_perf_id: 8, date: '2017-05-31 19:00:00', price: ''},
+		{t_perf_id: 9, date: '2017-04-22 18:00:00', price: ''},
+		{t_perf_id: 9, date: '2017-05-18 19:00:00', price: ''},
+		{t_perf_id: 14, date: '2017-04-20 19:00:00', price: ''},
+		{t_perf_id: 14, date: '2017-04-28 19:00:00', price: ''},
+		{t_perf_id: 14, date: '2017-05-03 19:00:00', price: ''},
+		{t_perf_id: 14, date: '2017-05-30 19:00:00', price: ''},
+		{t_perf_id: 10, date: '2017-04-18 19:00:00', price: ''},
+		{t_perf_id: 11, date: '2017-04-19 19:00:00', price: ''},
+		{t_perf_id: 11, date: '2017-04-21 15:00:00', price: ''},
+		{t_perf_id: 11, date: '2017-05-24 19:00:00', price: ''},
+		{t_perf_id: 12, date: '2017-04-20 19:00:00', price: ''},
+		{t_perf_id: 13, date: '2017-04-22 19:00:00', price: ''}
+	]
+)

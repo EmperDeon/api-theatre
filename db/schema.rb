@@ -110,19 +110,20 @@ ActiveRecord::Schema.define(version: 20170403131042) do
 		t.string "img"
 		t.string "address"
 		t.string "tel_num"
+		t.string "site"
 		t.datetime "created_at", null: false
 		t.datetime "updated_at", null: false
 		t.datetime "deleted_at"
 	end
 
 	create_table "tickets", force: :cascade do |t|
-		t.integer "user_id"
+		t.integer "u_api_id"
 		t.integer "poster_id"
 		t.string "ticket"
 		t.datetime "created_at", null: false
 		t.datetime "updated_at", null: false
 		t.index ["poster_id"], name: "index_tickets_on_poster_id"
-		t.index ["user_id"], name: "index_tickets_on_user_id"
+		t.index ["u_api_id"], name: "index_tickets_on_u_api_id"
 	end
 
 	create_table "u_apis", force: :cascade do |t|

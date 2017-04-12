@@ -31,4 +31,6 @@ json.response do
 		end
 	end
 
+	json.pstrs @pstrs
+
 end

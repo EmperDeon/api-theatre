@@ -48,6 +48,7 @@ create_res_perms 't_halls' # 17, 18
 add_perms_to_user 1, (1..18) # Admin
 add_perms_to_user 2, (5..18) # Theatre admin
 add_perms_to_user 5, (5..18) # Theatre admin
+add_perms_to_user 6, (5..18) # Theatre admin
 
 add_perms_to_user 3, (7..12).to_a + (15..18).to_a # Theatre users
 add_perms_to_user 4, (13..15)

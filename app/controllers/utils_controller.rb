@@ -29,23 +29,44 @@ class UtilsController < ApplicationController
 	# noinspection RailsChecklist01
 	def updates
 		stamp = Time.at(params[:stamp].to_i ||= 0)
-		#
-		# @articles = Article.updated_since(stamp).includes(:theatre)
-		# @posters = Poster.updated_since(stamp).includes(t_perf: [{perf: [:p_type]}, :theatre, :t_hall])
-		# @p_types = PType.updated_since(stamp)
-		# @theatres = Theatre.updated_since(stamp).includes(t_perfs: [{perf: [:p_type]}, :theatre, :t_hall])
 
-		r = {
-			articles: Article.updated_since(stamp),
-			p_types: PType.updated_since(stamp),
-			performances: Performance.updated_since(stamp),
-			posters: Poster.updated_since(stamp),
-			t_halls: THall.updated_since(stamp),
-			t_performances: TPerformance.updated_since(stamp),
-			theatres: Theatre.updated_since(stamp),
+		@articles = Article.updated_since(stamp).includes(:theatre)
+		@posters = Poster.updated_since(stamp).includes(t_perf: [{perf: [:p_type]}, :theatre, :t_hall])
+		@p_types = PType.updated_since(stamp)
+		@theatres = Theatre.updated_since(stamp).includes(t_perfs: [{perf: [:p_type]}, :theatre, :t_hall])
+		@pstrs = get_pstrs(stamp)
+
+			# r = {
+			# 	articles: Article.updated_since(stamp),
+			# 	p_types: PType.updated_since(stamp),
+			# 	performances: Performance.updated_since(stamp),
+			# 	posters: Poster.updated_since(stamp),
+			# 	t_halls: THall.updated_since(stamp),
+			# 	t_performances: TPerformance.updated_since(stamp),
+			# 	theatres: Theatre.updated_since(stamp),
+			#     pstrs: get_pstrs(stamp),
+			# 	timestamp: Time.now.to_i
+			# }
+			#
+			# res r
+	end
+
+	def get_pstrs (stamp)
+		r = []
+
+		TPerformance.updated_since(stamp).includes(:posters).each { |t|
+			p = t.posters
+
+			rt = {}
+			rt[:id] = t.id
+
+			rt[:near] = p.size > 0 ? {id: p[0].id, date: p[0].date} : nil
+			rt[:posters] = p.collect { |tp| {id: tp.id, date: tp.date} }
+
+			r << rt
 		}
 
-		res r
+		r
 	end
 
 	def root
@@ -350,6 +371,17 @@ class UtilsController < ApplicationController
 
 		elsif type == 'u_perms'
 			sql += "perm NOT LIKE 'theatres%' AND perm NOT LIKE '%approve' AND perm NOT LIKE '%choose'"
+
+		elsif type == 'performances'
+			check_api_token
+
+			unless @current_user
+				return 'ERROR'
+			end
+
+			id = @current_user.theatre_id
+
+			sql += 'approved = 0 OR approved = ' + id.to_s
 		end
 
 		# Return

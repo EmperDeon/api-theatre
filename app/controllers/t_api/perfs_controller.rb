@@ -18,7 +18,7 @@ module TApi
 		end
 
 		def update_action
-
+			@model.update!(params.permit(:author, :name, :p_type_id))
 		end
 
 		def approval

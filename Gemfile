@@ -66,5 +66,7 @@ gem 'paranoia', '~> 2.2'
 # Hall rendering
 gem 'gd2-ffij', :git => 'https://github.com/dark-panda/gd2-ffij.git'
 
+gem 'seed_dump'
+
 # For heroku
 ruby '2.2.6'

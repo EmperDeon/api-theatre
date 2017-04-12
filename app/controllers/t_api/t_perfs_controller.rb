@@ -16,7 +16,7 @@ module TApi
 			t_perf = TPerformance.new(post_params)
 			t_perf.perf = perf
 
-			JSON.parse(params['actors']).each { |a|
+			JSON.parse(params['actors'] || '[]').each { |a|
 				t_perf.actors << Actor::find(a)
 			}
 
@@ -34,7 +34,7 @@ module TApi
 			end
 
 			@model.actors.clear
-			JSON.parse(params['actors']).each { |a|
+			JSON.parse(params['actors'] || '[]').each { |a|
 				@model.actors << Actor::find(a)
 			}
 
