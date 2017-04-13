@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20170403131042) do
 		t.integer "t_hall_id"
 		t.integer "perf_id"
 		t.string "img"
-		t.string "desc_s"
+		t.text "desc_s"
 		t.text "desc"
 		t.datetime "created_at", null: false
 		t.datetime "updated_at", null: false

@@ -46,8 +46,11 @@ bower.json
 .byebug_history
 
 .idea/
+public/halls/*
 public/img/*.png
 !public/img/no_img.png
 !public/img/no_img-p.png
 
 public/none-o.png
+
+db/seeds_old/*
