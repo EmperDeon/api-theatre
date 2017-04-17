@@ -30,7 +30,7 @@ class UtilsController < ApplicationController
 	def updates
 		stamp = Time.at(params[:stamp].to_i ||= 0)
 
-		# @articles = Article.updated_since(stamp).includes(:theatre)
+		@articles = Article.updated_since(stamp).includes(:theatre)
 		# @p_types = PType.updated_since(stamp)
 		@perfs = TPerformance.updated_since(stamp).includes(:posters, :theatre, :t_hall, perf: [:p_type])
 		@theatres = Theatre.updated_since(stamp).includes(t_perfs: [{perf: [:p_type]}, :theatre, :t_hall])

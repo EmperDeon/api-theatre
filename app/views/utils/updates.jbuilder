@@ -3,11 +3,11 @@ json.response do
 	# For next requests
 	json.timestamp Time.now.to_i
 
-	# json.articles @articles do |a|
-	# 	json.(a, :name, :desc, :img)
-	# 	json.date a.updated_at
-	# 	json.theatre_name a.theatre.name
-	# end
+	json.articles @articles do |a|
+		json.(a, :id, :name, :desc, :img)
+		json.date a.updated_at
+		json.theatre_name a.theatre.name
+	end
 
 	json.perfs @perfs do |p|
 		json.(p, :id, :desc)
@@ -21,7 +21,7 @@ json.response do
 	end
 
 	json.theatres @theatres do |a|
-		json.(a, :name, :desc, :img)
+		json.(a, :id, :name, :desc, :img, :address)
 		# json.t_perfs a.t_perfs do |p|
 		# 	json.(p.perf, :author, :name, :p_type_id)
 		# 	json.(p, :desc)
