@@ -6,4 +6,8 @@ ru-RU:
   model-desc-t_halls: 'Залы'
   model-desc-t_perfs: 'Спектакли в театре'
   model-desc-theatres: 'Театры'
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'Данные заполнены неправильно или не до конца'
 #  model-desc-: ''

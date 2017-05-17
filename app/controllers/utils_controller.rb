@@ -1,6 +1,8 @@
 require 'open-uri'
 
 class UtilsController < ApplicationController
+	include ActionController::MimeResponds
+
 	before_action :check_api_token, only: [:get_deleted]
 
 	# Allowed lists
@@ -11,7 +13,7 @@ class UtilsController < ApplicationController
 	E_LISTS_C = %w(actors articles performances theatres p_types t_halls)
 
 	# Tables, with column theatre_id
-	T_LISTS = %w(actors t_halls t_performances articles actors u_apis theatres)
+	T_LISTS = %w(actors t_halls t_performances articles actors u_apis theatres posters)
 
 	# Tables, with deleted_at column
 	T_DELETABLE = %w(t_halls)
@@ -66,7 +68,13 @@ class UtilsController < ApplicationController
 	end
 
 	def get_hall_preview
-		send_file(TApi::THallsController::get_image(params[:id]))
+		# THall.find(params[:id]).img
+		send_file TApi::THallsController::get_image(params[:id])
+	end
+
+	def get_poster_preview
+		# THall.find(params[:id]).img
+		send_file TApi::THallsController::get_image_p(Poster.find(params[:id]).t_perf.t_hall_id, params[:id])
 	end
 
 	#
@@ -357,6 +365,9 @@ class UtilsController < ApplicationController
 			if type == 'theatres' && id != 0
 				sql += 'id = ' + id.to_s
 
+			elsif type == 'posters'
+				sql += 't.theatre_id = ' + id.to_s
+
 			elsif id != 0
 				sql += 'theatre_id = ' + id.to_s
 			end
@@ -374,6 +385,7 @@ class UtilsController < ApplicationController
 			id = @current_user.theatre_id
 
 			sql += 'approved = 0 OR approved = ' + id.to_s
+
 		end
 
 		# Return

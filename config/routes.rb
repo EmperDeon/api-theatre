@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
 	scope '/auth_api' do
 		match 'new', to: 'auth#api_auth', via: [:get, :post]
 		post 'check', to: 'auth#api_check'
@@ -28,7 +27,7 @@ Rails.application.routes.draw do
 		get 'form_json', to: 'utils#form_json'
 		post 'set_json', to: 'utils#set_json'
 
-		get 'hall_preview', to: 'utils#get_hall_preview'
+		get 'hall_preview/:id/:poster', to: 'utils#get_hall_preview'
 	end
 
 
@@ -90,6 +89,13 @@ Rails.application.routes.draw do
 		get 'resource', to: 'resource#get'
 	end
 
+
+	get 'tickets/get_hall/:id', to: 'utils#get_poster_preview'
+
+	get 'tickets/get_pdf/:id/:seat', to: 'tickets#get_pdf'
+	get 'tickets/get_qrcode/:id/:seat', to: 'tickets#get_qrcode'
+
+	get 'tickets/seats/:id', to: 'tickets#get_hall_info'
 
 	root 'utils#root'
 end

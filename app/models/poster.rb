@@ -11,7 +11,7 @@ class Poster < ResourceRecord
 	#
 	# Validations
 	#
-	validate :check_uniqueness
+	# validate :check_uniqueness
 	validates :t_perf, :date, presence: true
 
 

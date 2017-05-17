@@ -46,8 +46,6 @@ group :development, :test do
 
     # Beautify IRB console
     gem 'hirb'
-
-
 end
 
 # QuickFix: hide warnings from console
@@ -66,7 +64,19 @@ gem 'paranoia', '~> 2.2'
 # Hall rendering
 gem 'gd2-ffij', :git => 'https://github.com/dark-panda/gd2-ffij.git'
 
+# Seed dumping
 gem 'seed_dump'
+
+# For Slim templates
+gem 'slim'
+gem 'slim-rails'
+
+# PDF render
+gem 'pdfkit'
+gem 'wkhtmltopdf-binary'
+
+# QR Code creation
+gem 'rqrcode'
 
 # For heroku
 ruby '2.2.6'

@@ -5,6 +5,7 @@ class CreateTHalls < ActiveRecord::Migration[5.0]
 
             t.string :name
             t.text :json
+            t.string :img, null: true
 
             t.timestamps
             t.datetime :deleted_at

@@ -1,0 +1,35 @@
+<html>
+<head>
+  <meta name="pdfkit-page_size" content="Letter"/>
+  <style>
+    h2 {
+      font-size: 24pt;
+    }
+
+    #qrCode {
+      width: 360px;
+      height: 360px;
+
+      float: right;
+    }
+  </style>
+</head>
+<body>
+<img id="qrCode" src="data:image/png;base64,<%= @qr_image %>"/>
+<h2>Электронный билет</h2>
+
+<b>Театр: </b> <%= @t['theatre'] %> <br/>
+<b>Зал: </b> <%= @t['theatre_hall'] %> <br/>
+<br/>
+<b>Название спектакля: </b> <%= @t['poster_name'] %> <br/>
+<b>Дата спектакля: </b> <%= @t['poster_date'] %> <br/>
+<br/>
+<b>Сектор: </b> <%= @t['seat_sector'] %> <br/>
+<b>Ряд: </b> <%= @t['seat_row'] %> <br/>
+<b>Место: </b> <%= @t['seat_seat'] %> <br/>
+<br/>
+<b>Дата бронирования: </b> <%= @t['buy_date'] %> <br/>
+
+
+</body>
+</html>

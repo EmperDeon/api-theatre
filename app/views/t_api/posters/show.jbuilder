@@ -1,5 +1,5 @@
 json.response do
-	json.(@model, :date)
+	json.(@model, :id, :date)
 
 	json.perf(@model.t_perf.perf, :id, :name, :author)
 	json.hall @model.t_perf.t_hall_id

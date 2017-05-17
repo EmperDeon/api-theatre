@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403131042) do
+ActiveRecord::Schema.define(version: 20170423161223) do
 
 	create_table "actors", force: :cascade do |t|
 		t.integer "theatre_id"
@@ -40,10 +40,28 @@ ActiveRecord::Schema.define(version: 20170403131042) do
 	end
 
 	create_table "comments", force: :cascade do |t|
-		t.string "author"
+		t.integer "u_web_id"
 		t.text "content"
 		t.integer "rating"
 		t.integer "status", default: 0
+		t.datetime "created_at", null: false
+		t.datetime "updated_at", null: false
+		t.datetime "deleted_at"
+		t.index ["u_web_id"], name: "index_comments_on_u_web_id"
+	end
+
+	create_table "favorites", force: :cascade do |t|
+		t.integer "u_web_id"
+		t.integer "t_perf_id"
+		t.datetime "created_at", null: false
+		t.datetime "updated_at", null: false
+		t.datetime "deleted_at"
+		t.index ["u_web_id"], name: "index_favorites_on_u_web_id"
+	end
+
+	create_table "galleries", force: :cascade do |t|
+		t.integer "t_perf_id"
+		t.string "img"
 		t.datetime "created_at", null: false
 		t.datetime "updated_at", null: false
 		t.datetime "deleted_at"
@@ -79,7 +97,7 @@ ActiveRecord::Schema.define(version: 20170403131042) do
 		t.integer "poster_id"
 		t.string "seat"
 		t.float "price"
-		t.boolean "sell"
+		t.boolean "sell", default: false
 		t.index ["poster_id"], name: "index_seats_on_poster_id"
 	end
 
@@ -87,6 +105,7 @@ ActiveRecord::Schema.define(version: 20170403131042) do
 		t.integer "theatre_id"
 		t.string "name"
 		t.text "json"
+		t.string "img"
 		t.datetime "created_at", null: false
 		t.datetime "updated_at", null: false
 		t.datetime "deleted_at"
@@ -117,13 +136,13 @@ ActiveRecord::Schema.define(version: 20170403131042) do
 	end
 
 	create_table "tickets", force: :cascade do |t|
-		t.integer "u_api_id"
+		t.integer "u_web_id"
 		t.integer "poster_id"
 		t.string "ticket"
 		t.datetime "created_at", null: false
 		t.datetime "updated_at", null: false
 		t.index ["poster_id"], name: "index_tickets_on_poster_id"
-		t.index ["u_api_id"], name: "index_tickets_on_u_api_id"
+		t.index ["u_web_id"], name: "index_tickets_on_u_web_id"
 	end
 
 	create_table "u_apis", force: :cascade do |t|
@@ -149,13 +168,15 @@ ActiveRecord::Schema.define(version: 20170403131042) do
 	end
 
 	create_table "u_webs", force: :cascade do |t|
-		t.string "login"
-		t.string "password_digest"
+		t.string "login", default: "", null: false
+		t.string "encrypted_password", default: "", null: false
+		t.datetime "remember_created_at"
 		t.string "fio"
 		t.string "tel_num"
 		t.datetime "created_at", null: false
 		t.datetime "updated_at", null: false
 		t.datetime "deleted_at"
+		t.index ["login"], name: "index_u_webs_on_login", unique: true
 	end
 
 end
