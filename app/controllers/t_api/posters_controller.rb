@@ -24,7 +24,7 @@ module TApi
 
 	        price = JSON.parse (params[:price] || '{}')
 
-	        ActiveRecord::Base.connection.execute('DELETE FROM seats WHERE poster_id = ?', @model.id)
+	        ActiveRecord::Base.connection.execute('DELETE FROM seats WHERE poster_id = ?' + @model.id)
 
 	        seats = 'INSERT INTO seats(poster_id, seat, price) VALUES'
 	        price['seats'].each { |k, v|
