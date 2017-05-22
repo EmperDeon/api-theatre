@@ -26,9 +26,9 @@ module TApi
 
       ActiveRecord::Base.connection.execute('DELETE FROM seats WHERE poster_id = ' + @model.id.to_s)
 
-      seats = 'INSERT INTO seats(poster_id, seat, price) VALUES'
+      seats = 'INSERT INTO seats(poster_id, seat, price, sell) VALUES'
       price['seats'].each {|k, v|
-        seats += "(#{@model.id}, '#{k}', #{v}),"
+        seats += "(#{@model.id}, '#{k}', #{v}, 0),"
       }
 
       ActiveRecord::Base.connection.execute(seats[0..-2])
