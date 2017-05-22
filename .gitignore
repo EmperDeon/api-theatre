@@ -47,9 +47,12 @@ bower.json
 
 .idea/
 public/halls/*
+public/qr/*
 public/img/*.png
 !public/img/no_img.png
 !public/img/no_img-p.png
+!public/halls/none.png
+!public/qr/.keep
 
 public/none-o.png
 
